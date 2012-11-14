@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		EB0923651605F077004ED6F9 /* film.png in Resources */ = {isa = PBXBuildFile; fileRef = EB0923631605F077004ED6F9 /* film.png */; };
+		EB0923661605F077004ED6F9 /* literatura.png in Resources */ = {isa = PBXBuildFile; fileRef = EB0923641605F077004ED6F9 /* literatura.png */; };
 		EB4D004915DE9CC700394DCE /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EB4D004815DE9CC700394DCE /* UIKit.framework */; };
 		EB4D004B15DE9CC700394DCE /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EB4D004A15DE9CC700394DCE /* Foundation.framework */; };
 		EB4D004D15DE9CC700394DCE /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EB4D004C15DE9CC700394DCE /* CoreGraphics.framework */; };
@@ -21,6 +23,22 @@
 		EB4D006C15DE9CC800394DCE /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EB4D004A15DE9CC700394DCE /* Foundation.framework */; };
 		EB4D007415DE9CC800394DCE /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = EB4D007215DE9CC800394DCE /* InfoPlist.strings */; };
 		EB4D007715DE9CC800394DCE /* geoEventsTests.m in Sources */ = {isa = PBXBuildFile; fileRef = EB4D007615DE9CC800394DCE /* geoEventsTests.m */; };
+		EB4D008115DE9D3000394DCE /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EB4D008015DE9D3000394DCE /* MapKit.framework */; };
+		EB5281F615DEA93E00D4D2D3 /* GeoEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = EB5281F115DEA93D00D4D2D3 /* GeoEvent.m */; };
+		EB5281FE15DEABEA00D4D2D3 /* LocationController.m in Sources */ = {isa = PBXBuildFile; fileRef = EB5281FD15DEABEA00D4D2D3 /* LocationController.m */; };
+		EB6047AB16298979007078D0 /* MyAnnotationButton.m in Sources */ = {isa = PBXBuildFile; fileRef = EB6047AA16298979007078D0 /* MyAnnotationButton.m */; };
+		EB65F83715E628470060D059 /* GeoEventDB.sql in Resources */ = {isa = PBXBuildFile; fileRef = EB65F83615E628470060D059 /* GeoEventDB.sql */; };
+		EB65F83A15E62AF40060D059 /* libsqlite3.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = EB65F83915E62AF40060D059 /* libsqlite3.0.dylib */; };
+		EB780AC615E4CEC40086FC5D /* MyLocation.m in Sources */ = {isa = PBXBuildFile; fileRef = EB780AC515E4CEC40086FC5D /* MyLocation.m */; };
+		EBA80A5115DED1A000B77B34 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EBA80A5015DED1A000B77B34 /* CoreLocation.framework */; };
+		EBBE44DE15F3CA1700077AF3 /* sports.png in Resources */ = {isa = PBXBuildFile; fileRef = EBBE44DD15F3CA1700077AF3 /* sports.png */; };
+		EBBE44E115F51B1B00077AF3 /* death.png in Resources */ = {isa = PBXBuildFile; fileRef = EBBE44DF15F51B1B00077AF3 /* death.png */; };
+		EBBE44E215F51B1B00077AF3 /* WAR.png in Resources */ = {isa = PBXBuildFile; fileRef = EBBE44E015F51B1B00077AF3 /* WAR.png */; };
+		EBBE44E715F67D7400077AF3 /* BIRTHDAY.png in Resources */ = {isa = PBXBuildFile; fileRef = EBBE44E415F67D7400077AF3 /* BIRTHDAY.png */; };
+		EBBE44E815F67D7400077AF3 /* CELEBRITY.png in Resources */ = {isa = PBXBuildFile; fileRef = EBBE44E515F67D7400077AF3 /* CELEBRITY.png */; };
+		EBBE44E915F67D7400077AF3 /* SAINT.png in Resources */ = {isa = PBXBuildFile; fileRef = EBBE44E615F67D7400077AF3 /* SAINT.png */; };
+		EBF95D1116261CE40080174E /* TSMiniWebBrowser.xib in Resources */ = {isa = PBXBuildFile; fileRef = EBF95D1016261CE40080174E /* TSMiniWebBrowser.xib */; };
+		EBF95D1316261D070080174E /* TSMiniWebBrowser.m in Sources */ = {isa = PBXBuildFile; fileRef = EBF95D1216261D070080174E /* TSMiniWebBrowser.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -34,6 +52,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		EB0923631605F077004ED6F9 /* film.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = film.png; sourceTree = "<group>"; };
+		EB0923641605F077004ED6F9 /* literatura.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = literatura.png; sourceTree = "<group>"; };
 		EB4D004415DE9CC700394DCE /* geoEvents.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = geoEvents.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EB4D004815DE9CC700394DCE /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		EB4D004A15DE9CC700394DCE /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -54,6 +74,31 @@
 		EB4D007315DE9CC800394DCE /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		EB4D007515DE9CC800394DCE /* geoEventsTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = geoEventsTests.h; sourceTree = "<group>"; };
 		EB4D007615DE9CC800394DCE /* geoEventsTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = geoEventsTests.m; sourceTree = "<group>"; };
+		EB4D008015DE9D3000394DCE /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		EB4D008215DE9D7B00394DCE /* es */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = es; path = es.lproj/ViewController_iPhone.xib; sourceTree = "<group>"; };
+		EB4D008315DE9D7B00394DCE /* es */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = es; path = es.lproj/ViewController_iPad.xib; sourceTree = "<group>"; };
+		EB4D008415DE9D7B00394DCE /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		EB4D008515DE9D7B00394DCE /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		EB5281EC15DEA71200D4D2D3 /* MyLocation.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MyLocation.h; sourceTree = "<group>"; };
+		EB5281F015DEA93D00D4D2D3 /* GeoEvent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GeoEvent.h; path = ../../GoldRush/Classes/GeoEvent.h; sourceTree = "<group>"; };
+		EB5281F115DEA93D00D4D2D3 /* GeoEvent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GeoEvent.m; path = ../../GoldRush/Classes/GeoEvent.m; sourceTree = "<group>"; };
+		EB5281FC15DEABEA00D4D2D3 /* LocationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LocationController.h; path = ../LocationController.h; sourceTree = "<group>"; };
+		EB5281FD15DEABEA00D4D2D3 /* LocationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LocationController.m; path = ../LocationController.m; sourceTree = "<group>"; };
+		EB6047A916298979007078D0 /* MyAnnotationButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyAnnotationButton.h; sourceTree = "<group>"; };
+		EB6047AA16298979007078D0 /* MyAnnotationButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyAnnotationButton.m; sourceTree = "<group>"; };
+		EB65F83615E628470060D059 /* GeoEventDB.sql */ = {isa = PBXFileReference; lastKnownFileType = file; name = GeoEventDB.sql; path = DataBase/GeoEventDB.sql; sourceTree = "<group>"; };
+		EB65F83915E62AF40060D059 /* libsqlite3.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.0.dylib; path = usr/lib/libsqlite3.0.dylib; sourceTree = SDKROOT; };
+		EB780AC515E4CEC40086FC5D /* MyLocation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyLocation.m; sourceTree = "<group>"; };
+		EBA80A5015DED1A000B77B34 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		EBBE44DD15F3CA1700077AF3 /* sports.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = sports.png; sourceTree = "<group>"; };
+		EBBE44DF15F51B1B00077AF3 /* death.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = death.png; sourceTree = "<group>"; };
+		EBBE44E015F51B1B00077AF3 /* WAR.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = WAR.png; sourceTree = "<group>"; };
+		EBBE44E415F67D7400077AF3 /* BIRTHDAY.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = BIRTHDAY.png; sourceTree = "<group>"; };
+		EBBE44E515F67D7400077AF3 /* CELEBRITY.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = CELEBRITY.png; sourceTree = "<group>"; };
+		EBBE44E615F67D7400077AF3 /* SAINT.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = SAINT.png; sourceTree = "<group>"; };
+		EBF95D0E16261ACD0080174E /* TSMiniWebBrowser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TSMiniWebBrowser.h; sourceTree = "<group>"; };
+		EBF95D1016261CE40080174E /* TSMiniWebBrowser.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TSMiniWebBrowser.xib; sourceTree = "<group>"; };
+		EBF95D1216261D070080174E /* TSMiniWebBrowser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TSMiniWebBrowser.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -61,6 +106,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EB65F83A15E62AF40060D059 /* libsqlite3.0.dylib in Frameworks */,
+				EBA80A5115DED1A000B77B34 /* CoreLocation.framework in Frameworks */,
+				EB4D008115DE9D3000394DCE /* MapKit.framework in Frameworks */,
 				EB4D004915DE9CC700394DCE /* UIKit.framework in Frameworks */,
 				EB4D004B15DE9CC700394DCE /* Foundation.framework in Frameworks */,
 				EB4D004D15DE9CC700394DCE /* CoreGraphics.framework in Frameworks */,
@@ -83,6 +131,8 @@
 		EB4D003915DE9CC700394DCE = {
 			isa = PBXGroup;
 			children = (
+				EBBE44E315F677A400077AF3 /* images */,
+				EB65F83915E62AF40060D059 /* libsqlite3.0.dylib */,
 				EB4D004E15DE9CC700394DCE /* geoEvents */,
 				EB4D006F15DE9CC800394DCE /* geoEventsTests */,
 				EB4D004715DE9CC700394DCE /* Frameworks */,
@@ -102,6 +152,8 @@
 		EB4D004715DE9CC700394DCE /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				EBA80A5015DED1A000B77B34 /* CoreLocation.framework */,
+				EB4D008015DE9D3000394DCE /* MapKit.framework */,
 				EB4D004815DE9CC700394DCE /* UIKit.framework */,
 				EB4D004A15DE9CC700394DCE /* Foundation.framework */,
 				EB4D004C15DE9CC700394DCE /* CoreGraphics.framework */,
@@ -113,6 +165,14 @@
 		EB4D004E15DE9CC700394DCE /* geoEvents */ = {
 			isa = PBXGroup;
 			children = (
+				EBF95D1216261D070080174E /* TSMiniWebBrowser.m */,
+				EBF95D1016261CE40080174E /* TSMiniWebBrowser.xib */,
+				EB65F83615E628470060D059 /* GeoEventDB.sql */,
+				EB5281FD15DEABEA00D4D2D3 /* LocationController.m */,
+				EB5281FC15DEABEA00D4D2D3 /* LocationController.h */,
+				EBF95D0E16261ACD0080174E /* TSMiniWebBrowser.h */,
+				EB5281F015DEA93D00D4D2D3 /* GeoEvent.h */,
+				EB5281F115DEA93D00D4D2D3 /* GeoEvent.m */,
 				EB4D005715DE9CC800394DCE /* AppDelegate.h */,
 				EB4D005815DE9CC800394DCE /* AppDelegate.m */,
 				EB4D005A15DE9CC800394DCE /* ViewController.h */,
@@ -120,6 +180,10 @@
 				EB4D005D15DE9CC800394DCE /* ViewController_iPhone.xib */,
 				EB4D006015DE9CC800394DCE /* ViewController_iPad.xib */,
 				EB4D004F15DE9CC700394DCE /* Supporting Files */,
+				EB5281EC15DEA71200D4D2D3 /* MyLocation.h */,
+				EB780AC515E4CEC40086FC5D /* MyLocation.m */,
+				EB6047A916298979007078D0 /* MyAnnotationButton.h */,
+				EB6047AA16298979007078D0 /* MyAnnotationButton.m */,
 			);
 			path = geoEvents;
 			sourceTree = "<group>";
@@ -152,6 +216,21 @@
 				EB4D007215DE9CC800394DCE /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		EBBE44E315F677A400077AF3 /* images */ = {
+			isa = PBXGroup;
+			children = (
+				EB0923631605F077004ED6F9 /* film.png */,
+				EB0923641605F077004ED6F9 /* literatura.png */,
+				EBBE44E415F67D7400077AF3 /* BIRTHDAY.png */,
+				EBBE44E515F67D7400077AF3 /* CELEBRITY.png */,
+				EBBE44E615F67D7400077AF3 /* SAINT.png */,
+				EBBE44DF15F51B1B00077AF3 /* death.png */,
+				EBBE44E015F51B1B00077AF3 /* WAR.png */,
+				EBBE44DD15F3CA1700077AF3 /* sports.png */,
+			);
+			name = images;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -228,6 +307,16 @@
 				EB4D005315DE9CC700394DCE /* InfoPlist.strings in Resources */,
 				EB4D005F15DE9CC800394DCE /* ViewController_iPhone.xib in Resources */,
 				EB4D006215DE9CC800394DCE /* ViewController_iPad.xib in Resources */,
+				EB65F83715E628470060D059 /* GeoEventDB.sql in Resources */,
+				EBBE44DE15F3CA1700077AF3 /* sports.png in Resources */,
+				EBBE44E115F51B1B00077AF3 /* death.png in Resources */,
+				EBBE44E215F51B1B00077AF3 /* WAR.png in Resources */,
+				EBBE44E715F67D7400077AF3 /* BIRTHDAY.png in Resources */,
+				EBBE44E815F67D7400077AF3 /* CELEBRITY.png in Resources */,
+				EBBE44E915F67D7400077AF3 /* SAINT.png in Resources */,
+				EB0923651605F077004ED6F9 /* film.png in Resources */,
+				EB0923661605F077004ED6F9 /* literatura.png in Resources */,
+				EBF95D1116261CE40080174E /* TSMiniWebBrowser.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -265,6 +354,11 @@
 				EB4D005515DE9CC800394DCE /* main.m in Sources */,
 				EB4D005915DE9CC800394DCE /* AppDelegate.m in Sources */,
 				EB4D005C15DE9CC800394DCE /* ViewController.m in Sources */,
+				EB5281F615DEA93E00D4D2D3 /* GeoEvent.m in Sources */,
+				EB5281FE15DEABEA00D4D2D3 /* LocationController.m in Sources */,
+				EB780AC615E4CEC40086FC5D /* MyLocation.m in Sources */,
+				EBF95D1316261D070080174E /* TSMiniWebBrowser.m in Sources */,
+				EB6047AB16298979007078D0 /* MyAnnotationButton.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -291,6 +385,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				EB4D005215DE9CC700394DCE /* en */,
+				EB4D008415DE9D7B00394DCE /* es */,
 			);
 			name = InfoPlist.strings;
 			sourceTree = "<group>";
@@ -299,6 +394,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				EB4D005E15DE9CC800394DCE /* en */,
+				EB4D008215DE9D7B00394DCE /* es */,
 			);
 			name = ViewController_iPhone.xib;
 			sourceTree = "<group>";
@@ -307,6 +403,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				EB4D006115DE9CC800394DCE /* en */,
+				EB4D008315DE9D7B00394DCE /* es */,
 			);
 			name = ViewController_iPad.xib;
 			sourceTree = "<group>";
@@ -315,6 +412,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				EB4D007315DE9CC800394DCE /* en */,
+				EB4D008515DE9D7B00394DCE /* es */,
 			);
 			name = InfoPlist.strings;
 			sourceTree = "<group>";
@@ -358,6 +456,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
+				"GCC_PREPROCESSOR_DEFINITIONS[arch=*]" = "";
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
@@ -444,6 +543,7 @@
 				EB4D007C15DE9CC800394DCE /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		EB4D007D15DE9CC800394DCE /* Build configuration list for PBXNativeTarget "geoEventsTests" */ = {
 			isa = XCConfigurationList;
@@ -452,6 +552,7 @@
 				EB4D007F15DE9CC800394DCE /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
