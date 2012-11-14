@@ -7,13 +7,24 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <sqlite3.h> 
 
 @class ViewController;
 
-@interface AppDelegate : UIResponder <UIApplicationDelegate>
+@interface AppDelegate : UIResponder <UIApplicationDelegate>{
+    // Database variables
+	NSString *databaseName;
+	NSString *databasePath;
+    // Array to store the animal objects
+	NSMutableArray *geoEvents;
+}
 
-@property (strong, nonatomic) UIWindow *window;
+@property (nonatomic, retain) IBOutlet UIWindow *window;
+@property (nonatomic, retain) ViewController *viewController;
+//@property (nonatomic, retain) NSMutableArray *geoEvents;
+@property (nonatomic, strong) NSMutableArray *geoEvents;
 
-@property (strong, nonatomic) ViewController *viewController;
+-(NSMutableArray*) readGeoEventsFromDatabase;
+-(NSMutableArray*) readGeoEventsFromDatabaseFromDate:(NSString *) date language:(NSString *)lang;
 
 @end
