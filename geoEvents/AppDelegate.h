@@ -19,8 +19,8 @@
 	NSMutableArray *geoEvents;
 }
 
-@property (nonatomic, retain) IBOutlet UIWindow *window;
-@property (nonatomic, retain) ViewController *viewController;
+@property (nonatomic, strong) IBOutlet UIWindow *window;
+@property (nonatomic, strong) ViewController *viewController;
 //@property (nonatomic, retain) NSMutableArray *geoEvents;
 @property (nonatomic, strong) NSMutableArray *geoEvents;
 

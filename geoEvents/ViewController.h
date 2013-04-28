@@ -12,22 +12,34 @@
 
 #define METERS_PER_MILE 1609.344
 
-@interface ViewController : UIViewController <MKMapViewDelegate, CLLocationManagerDelegate> {
+@interface ViewController : UIViewController <MKMapViewDelegate, CLLocationManagerDelegate, UIPickerViewDelegate> {
     
     MKMapView *mapView;
     MKUserLocation *userLocation;
     NSMutableArray *arrayItems;
     UIView *eventsSelectorView;
-    
+    float _currentZoom;
+    int _countBirthdays;
+    int _countDeaths;
+    int _countHistoricEvents;
+    UIView *buttonFilterView;
+    UIView *buttonCalendarView;
+    UIDatePicker *datePicker;
+    UIPickerView *monthPicker;
 }
 
 @property(nonatomic, readonly) MKUserLocation *userLocation;
 @property(nonatomic, strong) NSMutableArray *arrayItems;
-@property (nonatomic, retain) CLLocationManager *locationManager;
+@property (nonatomic, strong) CLLocationManager *locationManager;
 @property (nonatomic, strong) IBOutlet MKMapView *mapView;
 @property (strong, nonatomic) IBOutlet UIView *eventsSelectorView;
+@property (strong, nonatomic) IBOutlet UIView *buttonFilterView;
+@property (strong, nonatomic) IBOutlet UIView *buttonCalendarView;
+@property (strong, nonatomic) IBOutlet UIDatePicker *datePicker;
+@property (strong, nonatomic) IBOutlet UIPickerView *monthPicker;
 
 - (IBAction) showFilterMenu:(id)sender;
+- (IBAction) showCalendarFilterMenu:(id)sender;
 - (IBAction) filterEvents:(id)sender;
 
 @end
