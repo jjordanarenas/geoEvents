@@ -1,9 +1,9 @@
 //
 //  LocationController.m
-//  GoldRush
+//  GeoEvents
 //
 //  Created by Jorge Jordán Arenas on 30/09/11.
-//  Copyright 2011 __MyCompanyName__. All rights reserved.
+//  Copyright 2011 Insane Platypus Games. All rights reserved.
 //
 
 #import "LocationController.h"
