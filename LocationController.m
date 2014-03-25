@@ -67,8 +67,8 @@ static LocationController *sharedInstance;
 }
 
 -(void) dealloc {
-    locationManager = nil;
-    currentLocation = nil;
+   /* locationManager = nil;
+    currentLocation = nil;*/
 }
 
 @end

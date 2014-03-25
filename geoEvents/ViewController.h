@@ -9,10 +9,20 @@
 #import <MapKit/MapKit.h>
 #import <UIKit/UIKit.h>
 #import "CoreLocation/CLGeoCoder.h"
+#import "SMCalloutView.h"
 
 #define METERS_PER_MILE 1609.344
 
-@interface ViewController : UIViewController <MKMapViewDelegate, CLLocationManagerDelegate, UIPickerViewDelegate> {
+@interface MapAnnotation : NSObject <MKAnnotation>
+@property (nonatomic, copy) NSString *title, *subtitle;
+@property (nonatomic, assign) CLLocationCoordinate2D coordinate;
+@end
+
+@interface CustomMapView : MKMapView
+@property (strong, nonatomic) SMCalloutView *calloutView;
+@end
+
+@interface ViewController : UIViewController <MKMapViewDelegate, CLLocationManagerDelegate, UIPickerViewDelegate, UIWebViewDelegate, UIGestureRecognizerDelegate> {
     
     MKMapView *mapView;
     MKUserLocation *userLocation;
@@ -26,6 +36,13 @@
     UIView *buttonCalendarView;
     UIDatePicker *datePicker;
     UIPickerView *monthPicker;
+    UIWebView *webView;
+    UIToolbar *toolBar;
+    //UINavigationBar *toolBar;
+    UIToolbar *webToolBar;
+
+//    UINavigationController *navController;
+    UIActivityIndicatorView *activityIndicator;
 }
 
 @property(nonatomic, readonly) MKUserLocation *userLocation;
@@ -37,9 +54,20 @@
 @property (strong, nonatomic) IBOutlet UIView *buttonCalendarView;
 @property (strong, nonatomic) IBOutlet UIDatePicker *datePicker;
 @property (strong, nonatomic) IBOutlet UIPickerView *monthPicker;
+@property (nonatomic, strong) UIScrollView *scrollView;
+@property (nonatomic, strong) UIImageView *marsView;
+@property (nonatomic, strong) SMCalloutView *calloutView;
+@property (nonatomic, strong) CustomMapView *bottomMapView;
+
+//@property (nonatomic, strong) UINavigationController *navController;
+
+@property (nonatomic, strong) MKPinAnnotationView *selectedPin;
 
 - (IBAction) showFilterMenu:(id)sender;
 - (IBAction) showCalendarFilterMenu:(id)sender;
 - (IBAction) filterEvents:(id)sender;
+- (IBAction)deselectAnnotation:(id)sender;
+- (IBAction)dismissCustomView:(id)sender;
+//- (void)dismissCustomView;
 
 @end

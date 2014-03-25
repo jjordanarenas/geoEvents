@@ -1,0 +1,11 @@
+/* 
+  Localizable.strings
+  geoEvents
+
+  Created by Jorge Jordán Arenas on 09/01/14.
+  Copyright (c) 2014 Jorge Jordán Arenas. All rights reserved.
+*/
+
+"BIRTHDAY" = "Nacimiento";
+"DEATH" = "Fallecimiento";
+"EVENT" = "Evento histórico";

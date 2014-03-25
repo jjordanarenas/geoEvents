@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.iPad.XIB" version="3.0" toolsVersion="4514" systemVersion="13A603" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none" useAutolayout="YES">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3747"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ViewController">
+            <connections>
+                <outlet property="birthdayButton" destination="G2u-aE-Apr" id="vS5-GJ-aH5"/>
+                <outlet property="deathButton" destination="J7A-M3-zVp" id="pXR-Eu-PVx"/>
+                <outlet property="eventsButton" destination="Lsu-g0-qba" id="SEK-q5-ooP"/>
+                <outlet property="mapView" destination="1037" id="1053"/>
+                <outlet property="monthPicker" destination="Wj6-Kk-axZ" id="fwO-DM-3Qs"/>
+                <outlet property="view" destination="6" id="7"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="6">
+            <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="d2A-Qi-7c2">
+                    <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <subviews>
+                        <button opaque="NO" tag="12" contentMode="scaleToFill" verticalHuggingPriority="251" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Lsu-g0-qba">
+                            <rect key="frame" x="0.0" y="488" width="230" height="32"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="32" id="RUy-Py-TpS"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                            <state key="normal" title="Historical events">
+                                <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <color key="titleShadowColor" red="0.31217914790000001" green="1" blue="0.27577964620000001" alpha="1" colorSpace="calibratedRGB"/>
+                            </state>
+                            <connections>
+                                <action selector="filterEvents:" destination="-1" eventType="touchUpInside" id="fBF-GG-C00"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" tag="11" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="J7A-M3-zVp">
+                            <rect key="frame" x="0.0" y="456" width="230" height="32"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="230" id="PJu-pL-XwH"/>
+                                <constraint firstAttribute="height" constant="32" id="mSe-E7-g0Y"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                            <state key="normal" title="Deaths">
+                                <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="titleShadowColor" red="0.31217914790000001" green="1" blue="0.27577964620000001" alpha="1" colorSpace="calibratedRGB"/>
+                            </state>
+                            <connections>
+                                <action selector="filterEvents:" destination="-1" eventType="touchUpInside" id="7fr-Gp-szU"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" tag="10" contentMode="scaleToFill" verticalHuggingPriority="249" verticalCompressionResistancePriority="749" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="G2u-aE-Apr">
+                            <rect key="frame" x="0.0" y="422" width="230" height="32"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="230" id="1DT-KI-ubO"/>
+                                <constraint firstAttribute="height" constant="32" id="z9K-xf-Bc8"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                            <state key="normal" title="Births">
+                                <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="titleShadowColor" red="0.31217914790000001" green="1" blue="0.27577964620000001" alpha="1" colorSpace="calibratedRGB"/>
+                            </state>
+                            <connections>
+                                <action selector="filterEvents:" destination="-1" eventType="touchUpInside" id="jvM-BC-LR0"/>
+                            </connections>
+                        </button>
+                        <pickerView contentMode="scaleToFill" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Wj6-Kk-axZ" userLabel="Month Picker">
+                            <rect key="frame" x="0.0" y="206" width="230" height="216"/>
+                            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="230" id="QNw-bE-bfh"/>
+                            </constraints>
+                        </pickerView>
+                        <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="1037">
+                            <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                            <connections>
+                                <outlet property="delegate" destination="-1" id="1052"/>
+                            </connections>
+                        </mapView>
+                    </subviews>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstItem="Wj6-Kk-axZ" firstAttribute="leading" secondItem="d2A-Qi-7c2" secondAttribute="leading" id="1MT-2d-nDg"/>
+                        <constraint firstItem="J7A-M3-zVp" firstAttribute="leading" secondItem="G2u-aE-Apr" secondAttribute="leading" id="KLF-Qc-X8l"/>
+                        <constraint firstItem="Wj6-Kk-axZ" firstAttribute="centerX" secondItem="d2A-Qi-7c2" secondAttribute="centerX" constant="-397" id="KOv-9w-I4x"/>
+                        <constraint firstItem="Lsu-g0-qba" firstAttribute="top" secondItem="J7A-M3-zVp" secondAttribute="bottom" id="RLJ-wf-ckH"/>
+                        <constraint firstItem="G2u-aE-Apr" firstAttribute="top" secondItem="Wj6-Kk-axZ" secondAttribute="bottom" id="S4C-DA-uGH"/>
+                        <constraint firstItem="Lsu-g0-qba" firstAttribute="trailing" secondItem="J7A-M3-zVp" secondAttribute="trailing" id="W15-Fj-OeN"/>
+                        <constraint firstItem="J7A-M3-zVp" firstAttribute="top" secondItem="G2u-aE-Apr" secondAttribute="bottom" constant="2" id="cfA-qi-eUO"/>
+                        <constraint firstItem="Lsu-g0-qba" firstAttribute="leading" secondItem="J7A-M3-zVp" secondAttribute="leading" id="fPA-uA-kl4"/>
+                        <constraint firstItem="G2u-aE-Apr" firstAttribute="leading" secondItem="d2A-Qi-7c2" secondAttribute="leading" id="li7-47-yPH"/>
+                        <constraint firstItem="J7A-M3-zVp" firstAttribute="centerY" secondItem="d2A-Qi-7c2" secondAttribute="centerY" constant="88" id="p3F-fh-eny"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <color key="backgroundColor" white="0.75" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="d2A-Qi-7c2" firstAttribute="leading" secondItem="6" secondAttribute="leading" id="98a-rc-zi6"/>
+                <constraint firstItem="d2A-Qi-7c2" firstAttribute="top" secondItem="6" secondAttribute="top" id="Bd1-gp-dox"/>
+                <constraint firstAttribute="bottom" secondItem="d2A-Qi-7c2" secondAttribute="bottom" id="vUl-GE-Id4"/>
+            </constraints>
+            <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>
+            <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
+            <simulatedScreenMetrics key="simulatedDestinationMetrics"/>
+        </view>
+    </objects>
+</document>

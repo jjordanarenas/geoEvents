@@ -28,5 +28,6 @@
 
 - (id)initWithName:(NSString*)name address:(NSString*)address itemType:(NSString*)itemType image:(NSString*)image coordinate:(CLLocationCoordinate2D)coordinate geoEvent:(GeoEvent*)geoEvent;
 
+- (void) setTitle:title;
 
 @end

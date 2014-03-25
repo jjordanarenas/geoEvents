@@ -11,6 +11,8 @@
 @implementation MyAnnotationButton
 
 @synthesize urlToShow = urlToShow;
+@synthesize eventDescription = eventDescription;
+@synthesize eventType = eventType;
 
 - (id)initWithFrame:(CGRect)frame
 {
@@ -23,6 +25,14 @@
 
 - (NSString *)urlToShow {
     return urlToShow;
+}
+
+- (NSString *)eventDescription {
+    return eventDescription;
+}
+
+- (NSString *)eventType {
+    return eventType;
 }
 
 /*

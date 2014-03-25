@@ -40,17 +40,22 @@
     return _image;
 }
 
+- (void) setTitle:title {
+    _name = title;
+}
+
+
 - (GeoEvent *)geoEvent {
     return _geoEvent;
 }
 
 - (void)dealloc
 {
-    _name = nil;
+  /*  _name = nil;
     _address = nil;
     _itemType = nil;
     _image = nil;
-    _geoEvent = nil;
+    _geoEvent = nil;*/
 }
 
 @end

@@ -8,6 +8,7 @@
 
 #import "AppDelegate.h"
 #import "ViewController.h"
+#import "MyLocation.h"
 #import "GeoEvent.h"
 
 @implementation AppDelegate
@@ -19,29 +20,40 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+    
+    /*// Create an instance of a UINavigationController
+    UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:viewController];
+    
+    // Place navigation controller's view in the window hierarchy
+    self.window.rootViewController = navController;
+    */
     // Override point for customization after application launch.
     if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone) {
-        self.viewController = [[ViewController alloc] initWithNibName:@"ViewController_iPhone" bundle:nil];
+        self.window.rootViewController = [[ViewController alloc] initWithNibName:@"ViewController_iPhone" bundle:nil];
     } else {
-        self.viewController = [[ViewController alloc] initWithNibName:@"ViewController_iPad" bundle:nil];
+        self.window.rootViewController = [[ViewController alloc] initWithNibName:@"ViewController_iPad" bundle:nil];
     }
     
+    int cacheSizeMemory = 4*1024*1024; // 4MB
+    int cacheSizeDisk = 32*1024*1024; // 32MB
+    NSURLCache *sharedCache = [[NSURLCache alloc] initWithMemoryCapacity:cacheSizeMemory diskCapacity:cacheSizeDisk diskPath:@"nsurlcache"];
+ 
+    [NSURLCache setSharedURLCache:sharedCache];
+    
     // Setup some globals
-	databaseName = @"GeoEventDB.sql";
+	NSString *databaseName = @"GeoEventDB.sql";
 	
-	// Get the path to the documents directory and append the databaseName
-	//NSArray *documentPaths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-
+	// Get the path to the caches directory and append the databaseName
     NSArray *documentPaths = NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES);
     
 	NSString *documentsDir = [documentPaths objectAtIndex:0];
-    // Init the array
-	geoEvents = [[NSMutableArray alloc] init];
     
 	databasePath = [documentsDir stringByAppendingPathComponent:databaseName];
 	
-    NSError *error = nil;
-    NSURL* url = [NSURL URLWithString:databasePath];
+
+    
+    NSError *error;
+    NSURL* url = [NSURL fileURLWithPath:databasePath];
     BOOL success = [url setResourceValue: [NSNumber numberWithBool: YES]
                                   forKey: NSURLIsExcludedFromBackupKey
                                    error: &error];
@@ -55,7 +67,6 @@
 	// Execute the "checkAndCreateDatabase" function
 	[self checkAndCreateDatabase];
  
-    self.window.rootViewController = self.viewController;
     [self.window makeKeyAndVisible];
     return YES;
 }
@@ -64,41 +75,7 @@
 	
     sleep(2);
     
-   /*
-    // Setup some globals
-	databaseName = @"GeoEventDB.sql";
-	
-	// Get the path to the documents directory and append the databaseName
-	//NSArray *documentPaths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-
-
-    NSArray *documentPaths = NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES);
-                               
-	NSString *documentsDir = [documentPaths objectAtIndex:0];
-
-	databasePath = [documentsDir stringByAppendingPathComponent:databaseName];
-
-    NSError *error = nil;
-    NSURL* url = [NSURL URLWithString:databasePath];
-    BOOL success = [url setResourceValue: [NSNumber numberWithBool: YES]
-                                  forKey: NSURLIsExcludedFromBackupKey
-                                   error: &error];
-    
-    if(!success){
-        NSLog(@"Error excluding %@ from backup %@", [url lastPathComponent], error);
-    } else{
-        NSLog(@"Success backing up %@", databasePath);
-    }
-        
-    
-	// Execute the "checkAndCreateDatabase" function
-	[self checkAndCreateDatabase];
-
-	// Query the database for all animal records and construct the "animals" array
-	//[self readAnimalsFromDatabase];
-	*/
-    
-	// Configure and show the window
+  	// Configure and show the window
 	[window addSubview:[viewController view]];
 	[window makeKeyAndVisible];
 }
@@ -119,6 +96,8 @@
 	
 	// If not then proceed to copy the database from the application to the users filesystem
 	
+    NSString *databaseName = @"GeoEventDB.sql";
+    
 	// Get the path to the database in the application package
 	NSString *databasePathFromApp = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:databaseName];
 	
@@ -128,62 +107,21 @@
     //	[fileManager release];
 }
 
--(NSMutableArray*) readGeoEventsFromDatabase {
-	// Setup the database object
-	sqlite3 *database;
-	
-	// Init the animals Array
-	geoEvents = [[NSMutableArray alloc] init];
-    
-	// Open the database from the users filessytem
-	if(sqlite3_open([databasePath UTF8String], &database) == SQLITE_OK) {
-		// Setup the SQL Statement and compile it for faster access
-		const char *sqlStatement = "select * from geoEvents";
-		sqlite3_stmt *compiledStatement;
-		if(sqlite3_prepare_v2(database, sqlStatement, -1, &compiledStatement, NULL) == SQLITE_OK) {
-			// Loop through the results and add them to the feeds array
-			while(sqlite3_step(compiledStatement) == SQLITE_ROW) {
-				// Read the data from the result row
-                NSString *aGeoEventId = [NSString stringWithUTF8String:(char *)sqlite3_column_text(compiledStatement, 0)];
-				NSString *aType = [NSString stringWithUTF8String:(char *)sqlite3_column_text(compiledStatement, 1)];
-				NSString *aLongitude = [NSString stringWithUTF8String:(char *)sqlite3_column_text(compiledStatement, 2)];
-				NSString *aLatitude = [NSString stringWithUTF8String:(char *)sqlite3_column_text(compiledStatement, 3)];
-				NSString *aCountry = [NSString stringWithUTF8String:(char *)sqlite3_column_text(compiledStatement, 4)];
-				NSString *aDate = [NSString stringWithUTF8String:(char *)sqlite3_column_text(compiledStatement, 5)];
-				NSString *aDescription = [NSString stringWithUTF8String:(char *)sqlite3_column_text(compiledStatement, 6)];
-				NSString *aIsCatched = [NSString stringWithUTF8String:(char *)sqlite3_column_text(compiledStatement, 7)];
-                NSString *aLanguage = [NSString stringWithUTF8String:(char *)sqlite3_column_text(compiledStatement, 8)];
-				NSString *aIsCoupled = [NSString stringWithUTF8String:(char *)sqlite3_column_text(compiledStatement, 9)];
-				NSString *aGeneration = [NSString stringWithUTF8String:(char *)sqlite3_column_text(compiledStatement, 10)];
-                
-				GeoEvent *geoEvent = [[GeoEvent alloc] initWithType:aType longitude:aLongitude latitude:aLatitude country:aCountry date:aDate description:aDescription isCoupled:aIsCoupled generation:aGeneration language:aLanguage isCatched:aIsCatched geoEventId:aGeoEventId];
-                
-				// Add the geoEvent object to the animals Array
-				[geoEvents addObject:geoEvent];
-			}
-		}
-		// Release the compiled statement from memory
-		sqlite3_finalize(compiledStatement);
-		
-	}
-	sqlite3_close(database);
-	
-    return geoEvents;
-}
-
 -(NSMutableArray*) readGeoEventsFromDatabaseFromDate:(NSString *) date language:(NSString *)lang{
 	// Setup the database object
 	sqlite3 *database;
 	
 	// Init the array
-	[geoEvents removeAllObjects];
-    geoEvents = [[NSMutableArray alloc] init];
+	
+    NSMutableArray *geoEvents = [[NSMutableArray alloc] init];
+    [geoEvents removeAllObjects];
+    
     GeoEvent *geoEvent;
     
 	// Open the database from the users filessytem
 	if(sqlite3_open([databasePath UTF8String], &database) == SQLITE_OK) {
 		// Setup the SQL Statement and compile it for faster access
-        NSString *sqlStatementConcat = [NSString stringWithFormat:@"select type, longitude, latitude, country, language, description, date, url from geoEvents where date like '%%%@%%' and language like '%%%@%%'", date, lang];
+        NSString *sqlStatementConcat = [NSString stringWithFormat:@"select distinct type, longitude, latitude, country, language, description, date, url from geoEvents where date like '%%%@%%' and language like '%%%@%%'", date, lang];
         
 		const char *sqlStatement = [sqlStatementConcat UTF8String];
 		sqlite3_stmt *compiledStatement;
@@ -219,9 +157,6 @@
         NSLog(@"close not OK.  rc=%d", rc);
     }
     
-    database = NULL;
-    geoEvent = nil;
-    
     return geoEvents;
 }
 
@@ -253,11 +188,10 @@
 }
 
 - (void)dealloc {
-    geoEvents = nil;
-    databasePath = nil;
-    databaseName = nil;
-    viewController = nil;
-    window = nil;
 }
 
 @end
+
+
+
+

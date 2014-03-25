@@ -8,23 +8,25 @@
 
 #import <UIKit/UIKit.h>
 #import <sqlite3.h> 
+#import "AppDelegate.h"
+#import <QuartzCore/QuartzCore.h>
+#import "MyLocation.h"
+#import "SMCalloutView.h"
 
 @class ViewController;
 
-@interface AppDelegate : UIResponder <UIApplicationDelegate>{
+@interface AppDelegate : UIResponder <UIApplicationDelegate, SMCalloutViewDelegate>{
     // Database variables
-	NSString *databaseName;
 	NSString *databasePath;
-    // Array to store the animal objects
-	NSMutableArray *geoEvents;
 }
 
 @property (nonatomic, strong) IBOutlet UIWindow *window;
 @property (nonatomic, strong) ViewController *viewController;
-//@property (nonatomic, retain) NSMutableArray *geoEvents;
 @property (nonatomic, strong) NSMutableArray *geoEvents;
 
--(NSMutableArray*) readGeoEventsFromDatabase;
 -(NSMutableArray*) readGeoEventsFromDatabaseFromDate:(NSString *) date language:(NSString *)lang;
 
 @end
+
+
+

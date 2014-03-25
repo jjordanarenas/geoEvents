@@ -10,8 +10,11 @@
 
 @interface MyAnnotationButton : UIButton {
     NSString *urlToShow;
+    NSString *eventDescription;
 }
 
 @property (nonatomic, retain) NSString *urlToShow;
+@property (nonatomic, retain) NSString *eventDescription;
+@property (nonatomic, retain) NSString *eventType;
 
 @end
