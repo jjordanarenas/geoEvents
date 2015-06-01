@@ -149,11 +149,15 @@ UIBarButtonItem *toolbarButton;
 UIBarButtonItem *webToolbarButton;
 UIBarButtonItem *eventTypeButton;
 
-int dayInteger = 0;
-int monthInteger = 0;
+//int dayInteger = 0;
+NSInteger dayInteger = 0;
+//int monthInteger = 0;
+NSInteger monthInteger = 0;
 
-double METERSPERMILE_ZOOMIN = 5000;
-double METERSPERMILE_ZOOMOUT = 3700000;
+//double METERSPERMILE_ZOOMIN = 5000;
+long METERSPERMILE_ZOOMIN = 5000;
+//double METERSPERMILE_ZOOMOUT = 3700000;
+long METERSPERMILE_ZOOMOUT = 3700000;
 
 -(void) locateUser{
 	CLLocationCoordinate2D zoomLocation;
@@ -196,6 +200,8 @@ double METERSPERMILE_ZOOMOUT = 3700000;
     if (calendarMustRefresh){
         [monthPicker selectRow:dayInteger inComponent:0 animated:TRUE];
         [monthPicker selectRow:monthInteger inComponent:1 animated:TRUE];
+       // [monthPicker selectRow:dayInteger inComponent:1 animated:TRUE];
+     //   [monthPicker selectRow:monthInteger inComponent:0 animated:TRUE];
         calendarMustRefresh = FALSE;
     }
     
@@ -216,17 +222,21 @@ double METERSPERMILE_ZOOMOUT = 3700000;
     
     //webView = [[UIWebView alloc] initWithFrame:CGRectMake(0, self.view.frame.size.width + 44, self.view.frame.size.height, self.view.frame.size.width)];
     
-    webView = [[UIWebView alloc] initWithFrame:CGRectMake(0, self.view.frame.size.width + 44, self.view.frame.size.height, self.view.frame.size.width)];
+    webView = [[UIWebView alloc] initWithFrame:CGRectMake(0, self.view.frame.size.width + 44, self.view.frame.size.width, self.view.frame.size.height)];
     [webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:@""]]];
 
   //  [self.navigationController pushViewController:self animated:YES];
 
    // toolBar = [[UIToolbar alloc] initWithFrame:CGRectMake(0, self.view.frame.size.width, self.view.frame.size.height, 44)];
     
-    toolBar = [[UIToolbar alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.height, 44)];
+   // toolBar = [[UIToolbar alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.height, 44)];
+     toolBar = [[UIToolbar alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 44)];
     /////toolBar = [[UINavigationBar alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.height, 44)];
     
-     webToolBar = [[UIToolbar alloc] initWithFrame:CGRectMake(0, self.view.frame.size.width, self.view.frame.size.height, 44)];
+     //webToolBar = [[UIToolbar alloc] initWithFrame:CGRectMake(0, self.view.frame.size.width, self.view.frame.size.height, 44)];
+    
+    webToolBar = [[UIToolbar alloc] initWithFrame:CGRectMake(0, self.view.frame.size.width, self.view.frame.size.width, 44)];
+    
     
   //  [self.navigationController pushViewController:self animated:TRUE];
     
@@ -335,8 +345,7 @@ shouldRecognizeSimultaneouslyWithGestureRecognizer:
     return YES;
 }
 
--(void) closeWebView
-{
+-(void) closeWebView {
 
     if (![webView isHidden]) { // Close webView
 
@@ -1069,26 +1078,44 @@ shouldRecognizeSimultaneouslyWithGestureRecognizer:
 // tell the picker how many rows are available for a given component
 - (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component {
 
+    NSLog(@"Component %d", component);
+    
+    
+    NSLog(@"Row in component:  %d", [monthPicker selectedRowInComponent:0]);
+
+    NSLog(@"Monthpicker number of components:  %d", [monthPicker numberOfComponents]);
+
+    //NSLog(@"Number of rows in component 1:  %d", [monthPicker numberOfRowsInComponent:1]);
+
+    
     if(component == 1){
         return [arrayMonths count];
-        } else if ((component == 0) && ([[arrayMonths objectAtIndex:[monthPicker selectedRowInComponent:1]] isEqual: @"Enero"] || [[arrayMonths objectAtIndex:[monthPicker selectedRowInComponent:1]] isEqual: @"Marzo"] || [[arrayMonths objectAtIndex:[monthPicker selectedRowInComponent:1]] isEqual: @"Mayo"] || [[arrayMonths objectAtIndex:[monthPicker selectedRowInComponent:1]] isEqual: @"Julio"] || [[arrayMonths objectAtIndex:[monthPicker selectedRowInComponent:1]] isEqual: @"Agosto"] || [[arrayMonths objectAtIndex:[monthPicker selectedRowInComponent:1]] isEqual: @"Octubre"] || [[arrayMonths objectAtIndex:[monthPicker selectedRowInComponent:1]] isEqual: @"Diciembre"] || [[arrayMonths objectAtIndex:[monthPicker selectedRowInComponent:1]] isEqual: @"January"] || [[arrayMonths objectAtIndex:[monthPicker selectedRowInComponent:1]] isEqual: @"March"] || [[arrayMonths objectAtIndex:[monthPicker selectedRowInComponent:1]] isEqual: @"May"] || [[arrayMonths objectAtIndex:[monthPicker selectedRowInComponent:1]] isEqual: @"July"] || [[arrayMonths objectAtIndex:[monthPicker selectedRowInComponent:1]] isEqual: @"August"] || [[arrayMonths objectAtIndex:[monthPicker selectedRowInComponent:1]] isEqual: @"October"] || [[arrayMonths objectAtIndex:[monthPicker selectedRowInComponent:1]] isEqual: @"December"])) {
+        
+        
+    } else if ((component == 0) && ([monthPicker numberOfComponents] > 1) && ([[arrayMonths objectAtIndex:[monthPicker selectedRowInComponent:1]] isEqual: @"Enero"] || [[arrayMonths objectAtIndex:[monthPicker selectedRowInComponent:1]] isEqual: @"Marzo"] || [[arrayMonths objectAtIndex:[monthPicker selectedRowInComponent:1]] isEqual: @"Mayo"] || [[arrayMonths objectAtIndex:[monthPicker selectedRowInComponent:1]] isEqual: @"Julio"] || [[arrayMonths objectAtIndex:[monthPicker selectedRowInComponent:1]] isEqual: @"Agosto"] || [[arrayMonths objectAtIndex:[monthPicker selectedRowInComponent:1]] isEqual: @"Octubre"] || [[arrayMonths objectAtIndex:[monthPicker selectedRowInComponent:1]] isEqual: @"Diciembre"] || [[arrayMonths objectAtIndex:[monthPicker selectedRowInComponent:1]] isEqual: @"January"] || [[arrayMonths objectAtIndex:[monthPicker selectedRowInComponent:1]] isEqual: @"March"] || [[arrayMonths objectAtIndex:[monthPicker selectedRowInComponent:1]] isEqual: @"May"] || [[arrayMonths objectAtIndex:[monthPicker selectedRowInComponent:1]] isEqual: @"July"] || [[arrayMonths objectAtIndex:[monthPicker selectedRowInComponent:1]] isEqual: @"August"] || [[arrayMonths objectAtIndex:[monthPicker selectedRowInComponent:1]] isEqual: @"October"] || [[arrayMonths objectAtIndex:[monthPicker selectedRowInComponent:1]] isEqual: @"December"])) {
             
             arrayDays = arrayDays31;
             [pickerView reloadInputViews];
             return [arrayDays count];
     }
-    else if ((component == 0) && ([[arrayMonths objectAtIndex:[monthPicker selectedRowInComponent:1]] isEqual: @"Febrero"] || [[arrayMonths objectAtIndex:[monthPicker selectedRowInComponent:1]] isEqual: @"February"])){
+    else if ((component == 0) && ([monthPicker numberOfComponents] > 1)  && ([[arrayMonths objectAtIndex:[monthPicker selectedRowInComponent:1]] isEqual: @"Febrero"] || [[arrayMonths objectAtIndex:[monthPicker selectedRowInComponent:1]] isEqual: @"February"])){
             
         arrayDays = arrayDaysFebruary;
         [pickerView reloadInputViews];
         return [arrayDays count];
   
-    } else if ((component == 0) && ([[arrayMonths objectAtIndex:[monthPicker selectedRowInComponent:1]] isEqual: @"Abril"] ||[[arrayMonths objectAtIndex:[monthPicker selectedRowInComponent:1]] isEqual: @"Junio"] || [[arrayMonths objectAtIndex:[monthPicker selectedRowInComponent:1]] isEqual: @"Septiembre"] || [[arrayMonths objectAtIndex:[monthPicker selectedRowInComponent:1]] isEqual: @"Noviembre"] || [[arrayMonths objectAtIndex:[monthPicker selectedRowInComponent:1]] isEqual: @"April"] ||[[arrayMonths objectAtIndex:[monthPicker selectedRowInComponent:1]] isEqual: @"June"] || [[arrayMonths objectAtIndex:[monthPicker selectedRowInComponent:1]] isEqual: @"September"] || [[arrayMonths objectAtIndex:[monthPicker selectedRowInComponent:1]] isEqual: @"November"])) {
+    } else if ((component == 0) && ([monthPicker numberOfComponents] > 1)  && ([[arrayMonths objectAtIndex:[monthPicker selectedRowInComponent:1]] isEqual: @"Abril"] ||[[arrayMonths objectAtIndex:[monthPicker selectedRowInComponent:1]] isEqual: @"Junio"] || [[arrayMonths objectAtIndex:[monthPicker selectedRowInComponent:1]] isEqual: @"Septiembre"] || [[arrayMonths objectAtIndex:[monthPicker selectedRowInComponent:1]] isEqual: @"Noviembre"] || [[arrayMonths objectAtIndex:[monthPicker selectedRowInComponent:1]] isEqual: @"April"] ||[[arrayMonths objectAtIndex:[monthPicker selectedRowInComponent:1]] isEqual: @"June"] || [[arrayMonths objectAtIndex:[monthPicker selectedRowInComponent:1]] isEqual: @"September"] || [[arrayMonths objectAtIndex:[monthPicker selectedRowInComponent:1]] isEqual: @"November"])) {
        
         arrayDays = arrayDays30;
         [pickerView reloadInputViews];
 
         return [arrayDays count];
+    } else {
+        arrayDays = arrayDays30;
+        [pickerView reloadInputViews];
+        
+        return [arrayDays count];
+
     }
 }
 
@@ -1099,9 +1126,15 @@ shouldRecognizeSimultaneouslyWithGestureRecognizer:
 
 - (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component
 {
+    //NSLog(@"Component %d", component);
     if(component == 1){
           
         NSString *month = [arrayMonths objectAtIndex:[monthPicker selectedRowInComponent:1]];
+       
+        NSLog(@"Month %@", month);
+        
+        NSLog(@"Month %d", [monthPicker selectedRowInComponent:0]);
+
         if ([month isEqual:@"Enero"] || [month isEqual:@"January"]) {
             monthSelected = @"01";
             arrayDays = arrayDays31;
@@ -1160,7 +1193,7 @@ shouldRecognizeSimultaneouslyWithGestureRecognizer:
             [pickerView reloadInputViews];
             [pickerView reloadAllComponents];
 
-        } else if ((component == 0) && ([[arrayMonths objectAtIndex:[monthPicker selectedRowInComponent:1]] isEqual: @"Enero"] || [[arrayMonths objectAtIndex:[monthPicker selectedRowInComponent:1]] isEqual: @"Marzo"] || [[arrayMonths objectAtIndex:[monthPicker selectedRowInComponent:1]] isEqual: @"Mayo"] || [[arrayMonths objectAtIndex:[monthPicker selectedRowInComponent:1]] isEqual: @"Julio"] || [[arrayMonths objectAtIndex:[monthPicker selectedRowInComponent:1]] isEqual: @"Agosto"] || [[arrayMonths objectAtIndex:[monthPicker selectedRowInComponent:1]] isEqual: @"Octubre"] || [[arrayMonths objectAtIndex:[monthPicker selectedRowInComponent:1]] isEqual: @"Diciembre"] || [[arrayMonths objectAtIndex:[monthPicker selectedRowInComponent:1]] isEqual: @"January"] || [[arrayMonths objectAtIndex:[monthPicker selectedRowInComponent:1]] isEqual: @"March"] || [[arrayMonths objectAtIndex:[monthPicker selectedRowInComponent:1]] isEqual: @"May"] || [[arrayMonths objectAtIndex:[monthPicker selectedRowInComponent:1]] isEqual: @"July"] || [[arrayMonths objectAtIndex:[monthPicker selectedRowInComponent:1]] isEqual: @"August"] || [[arrayMonths objectAtIndex:[monthPicker selectedRowInComponent:1]] isEqual: @"October"] || [[arrayMonths objectAtIndex:[monthPicker selectedRowInComponent:1]] isEqual: @"December"])) {
+        } else if ((component == 0) && ([monthPicker numberOfComponents] > 1)  && ([[arrayMonths objectAtIndex:[monthPicker selectedRowInComponent:1]] isEqual: @"Enero"] || [[arrayMonths objectAtIndex:[monthPicker selectedRowInComponent:1]] isEqual: @"Marzo"] || [[arrayMonths objectAtIndex:[monthPicker selectedRowInComponent:1]] isEqual: @"Mayo"] || [[arrayMonths objectAtIndex:[monthPicker selectedRowInComponent:1]] isEqual: @"Julio"] || [[arrayMonths objectAtIndex:[monthPicker selectedRowInComponent:1]] isEqual: @"Agosto"] || [[arrayMonths objectAtIndex:[monthPicker selectedRowInComponent:1]] isEqual: @"Octubre"] || [[arrayMonths objectAtIndex:[monthPicker selectedRowInComponent:1]] isEqual: @"Diciembre"] || [[arrayMonths objectAtIndex:[monthPicker selectedRowInComponent:1]] isEqual: @"January"] || [[arrayMonths objectAtIndex:[monthPicker selectedRowInComponent:1]] isEqual: @"March"] || [[arrayMonths objectAtIndex:[monthPicker selectedRowInComponent:1]] isEqual: @"May"] || [[arrayMonths objectAtIndex:[monthPicker selectedRowInComponent:1]] isEqual: @"July"] || [[arrayMonths objectAtIndex:[monthPicker selectedRowInComponent:1]] isEqual: @"August"] || [[arrayMonths objectAtIndex:[monthPicker selectedRowInComponent:1]] isEqual: @"October"] || [[arrayMonths objectAtIndex:[monthPicker selectedRowInComponent:1]] isEqual: @"December"])) {
        
             arrayDays = arrayDays31;
             if([monthPicker selectedRowInComponent:0] + 1 > arrayDays.count){
@@ -1170,7 +1203,7 @@ shouldRecognizeSimultaneouslyWithGestureRecognizer:
             }
             [pickerView reloadInputViews];
 
-    } else if ((component == 0) && ([[arrayMonths objectAtIndex:[monthPicker selectedRowInComponent:1]] isEqual: @"Febrero"] || [[arrayMonths objectAtIndex:[monthPicker selectedRowInComponent:1]] isEqual: @"February"])){
+    } else if ((component == 0) && ([monthPicker numberOfComponents] > 1)  && ([[arrayMonths objectAtIndex:[monthPicker selectedRowInComponent:1]] isEqual: @"Febrero"] || [[arrayMonths objectAtIndex:[monthPicker selectedRowInComponent:1]] isEqual: @"February"])){
      
         arrayDays = arrayDaysFebruary;
         if([monthPicker selectedRowInComponent:0] + 1 > arrayDays.count){
@@ -1179,7 +1212,7 @@ shouldRecognizeSimultaneouslyWithGestureRecognizer:
             daySelected = [arrayDays objectAtIndex:row];
         }
         [pickerView reloadInputViews];
-    } else if ((component == 0) && ([[arrayMonths objectAtIndex:[monthPicker selectedRowInComponent:1]] isEqual: @"Abril"] || [[arrayMonths objectAtIndex:[monthPicker selectedRowInComponent:1]] isEqual: @"Junio"] || [[arrayMonths objectAtIndex:[monthPicker selectedRowInComponent:1]] isEqual: @"Septiembre"] || [[arrayMonths objectAtIndex:[monthPicker selectedRowInComponent:1]] isEqual: @"Noviembre"] || [[arrayMonths objectAtIndex:[monthPicker selectedRowInComponent:1]] isEqual: @"April"] || [[arrayMonths objectAtIndex:[monthPicker selectedRowInComponent:1]] isEqual: @"June"] || [[arrayMonths objectAtIndex:[monthPicker selectedRowInComponent:1]] isEqual: @"September"] || [[arrayMonths objectAtIndex:[monthPicker selectedRowInComponent:1]] isEqual: @"November"])) {
+    } else if ((component == 0) && ([monthPicker numberOfComponents] > 1)  && ([[arrayMonths objectAtIndex:[monthPicker selectedRowInComponent:1]] isEqual: @"Abril"] || [[arrayMonths objectAtIndex:[monthPicker selectedRowInComponent:1]] isEqual: @"Junio"] || [[arrayMonths objectAtIndex:[monthPicker selectedRowInComponent:1]] isEqual: @"Septiembre"] || [[arrayMonths objectAtIndex:[monthPicker selectedRowInComponent:1]] isEqual: @"Noviembre"] || [[arrayMonths objectAtIndex:[monthPicker selectedRowInComponent:1]] isEqual: @"April"] || [[arrayMonths objectAtIndex:[monthPicker selectedRowInComponent:1]] isEqual: @"June"] || [[arrayMonths objectAtIndex:[monthPicker selectedRowInComponent:1]] isEqual: @"September"] || [[arrayMonths objectAtIndex:[monthPicker selectedRowInComponent:1]] isEqual: @"November"])) {
    
         arrayDays = arrayDays30;
         if([monthPicker selectedRowInComponent:0] + 1 > arrayDays.count){
@@ -1194,10 +1227,16 @@ shouldRecognizeSimultaneouslyWithGestureRecognizer:
 
 - (NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component
 {
-   
+    NSLog(@"Component %d", component);
+
     if(component == 1){
        
         NSString *month = [arrayMonths objectAtIndex:[monthPicker selectedRowInComponent:1]];
+        
+       // NSLog(@"Month %@", month);
+        
+        //NSLog(@"Month %d", [monthPicker selectedRowInComponent:0]);
+        
         if ([month isEqual:@"Enero"] || [month isEqual:@"January"]) {
             monthSelected = @"01";
             arrayDays = arrayDays31;
@@ -1251,14 +1290,14 @@ shouldRecognizeSimultaneouslyWithGestureRecognizer:
         
         return [arrayMonths objectAtIndex:row];
         
-    } else if ((component == 0) && ([[arrayMonths objectAtIndex:[monthPicker selectedRowInComponent:1]] isEqual: @"Enero"] || [[arrayMonths objectAtIndex:[monthPicker selectedRowInComponent:1]] isEqual: @"Marzo"] || [[arrayMonths objectAtIndex:[monthPicker selectedRowInComponent:1]] isEqual: @"Mayo"] || [[arrayMonths objectAtIndex:[monthPicker selectedRowInComponent:1]] isEqual: @"Julio"] || [[arrayMonths objectAtIndex:[monthPicker selectedRowInComponent:1]] isEqual: @"Agosto"] || [[arrayMonths objectAtIndex:[monthPicker selectedRowInComponent:1]] isEqual: @"Octubre"] || [[arrayMonths objectAtIndex:[monthPicker selectedRowInComponent:1]] isEqual: @"Diciembre"] || [[arrayMonths objectAtIndex:[monthPicker selectedRowInComponent:1]] isEqual: @"January"] || [[arrayMonths objectAtIndex:[monthPicker selectedRowInComponent:1]] isEqual: @"March"] || [[arrayMonths objectAtIndex:[monthPicker selectedRowInComponent:1]] isEqual: @"May"] || [[arrayMonths objectAtIndex:[monthPicker selectedRowInComponent:1]] isEqual: @"July"] || [[arrayMonths objectAtIndex:[monthPicker selectedRowInComponent:1]] isEqual: @"August"] || [[arrayMonths objectAtIndex:[monthPicker selectedRowInComponent:1]] isEqual: @"October"] || [[arrayMonths objectAtIndex:[monthPicker selectedRowInComponent:1]] isEqual: @"December"])) {
+    } else if ((component == 0) && ([monthPicker numberOfComponents] > 1)  && ([[arrayMonths objectAtIndex:[monthPicker selectedRowInComponent:1]] isEqual: @"Enero"] || [[arrayMonths objectAtIndex:[monthPicker selectedRowInComponent:1]] isEqual: @"Marzo"] || [[arrayMonths objectAtIndex:[monthPicker selectedRowInComponent:1]] isEqual: @"Mayo"] || [[arrayMonths objectAtIndex:[monthPicker selectedRowInComponent:1]] isEqual: @"Julio"] || [[arrayMonths objectAtIndex:[monthPicker selectedRowInComponent:1]] isEqual: @"Agosto"] || [[arrayMonths objectAtIndex:[monthPicker selectedRowInComponent:1]] isEqual: @"Octubre"] || [[arrayMonths objectAtIndex:[monthPicker selectedRowInComponent:1]] isEqual: @"Diciembre"] || [[arrayMonths objectAtIndex:[monthPicker selectedRowInComponent:1]] isEqual: @"January"] || [[arrayMonths objectAtIndex:[monthPicker selectedRowInComponent:1]] isEqual: @"March"] || [[arrayMonths objectAtIndex:[monthPicker selectedRowInComponent:1]] isEqual: @"May"] || [[arrayMonths objectAtIndex:[monthPicker selectedRowInComponent:1]] isEqual: @"July"] || [[arrayMonths objectAtIndex:[monthPicker selectedRowInComponent:1]] isEqual: @"August"] || [[arrayMonths objectAtIndex:[monthPicker selectedRowInComponent:1]] isEqual: @"October"] || [[arrayMonths objectAtIndex:[monthPicker selectedRowInComponent:1]] isEqual: @"December"])) {
        
         arrayDays = arrayDays31;
 
         [pickerView reloadInputViews];
         
         return [arrayDays objectAtIndex:row];
-    } else if ((component == 0) && ([[arrayMonths objectAtIndex:[monthPicker selectedRowInComponent:1]] isEqual: @"Febrero"] || [[arrayMonths objectAtIndex:[monthPicker selectedRowInComponent:1]] isEqual: @"February"])){
+    } else if ((component == 0) && ([monthPicker numberOfComponents] > 1)  && ([[arrayMonths objectAtIndex:[monthPicker selectedRowInComponent:1]] isEqual: @"Febrero"] || [[arrayMonths objectAtIndex:[monthPicker selectedRowInComponent:1]] isEqual: @"February"])){
     
         arrayDays = arrayDaysFebruary;
         
@@ -1266,7 +1305,7 @@ shouldRecognizeSimultaneouslyWithGestureRecognizer:
 
         return [arrayDays objectAtIndex:row];
 
-      } else if ((component == 0) && ([[arrayMonths objectAtIndex:[monthPicker selectedRowInComponent:1]] isEqual: @"Abril"] || [[arrayMonths objectAtIndex:[monthPicker selectedRowInComponent:1]] isEqual: @"Junio"] || [[arrayMonths objectAtIndex:[monthPicker selectedRowInComponent:1]] isEqual: @"Septiembre"] || [[arrayMonths objectAtIndex:[monthPicker selectedRowInComponent:1]] isEqual: @"Noviembre"] || [[arrayMonths objectAtIndex:[monthPicker selectedRowInComponent:1]] isEqual: @"April"] || [[arrayMonths objectAtIndex:[monthPicker selectedRowInComponent:1]] isEqual: @"June"] || [[arrayMonths objectAtIndex:[monthPicker selectedRowInComponent:1]] isEqual: @"September"] || [[arrayMonths objectAtIndex:[monthPicker selectedRowInComponent:1]] isEqual: @"November"])) {
+      } else if ((component == 0) && ([monthPicker numberOfComponents] > 1)  && ([[arrayMonths objectAtIndex:[monthPicker selectedRowInComponent:1]] isEqual: @"Abril"] || [[arrayMonths objectAtIndex:[monthPicker selectedRowInComponent:1]] isEqual: @"Junio"] || [[arrayMonths objectAtIndex:[monthPicker selectedRowInComponent:1]] isEqual: @"Septiembre"] || [[arrayMonths objectAtIndex:[monthPicker selectedRowInComponent:1]] isEqual: @"Noviembre"] || [[arrayMonths objectAtIndex:[monthPicker selectedRowInComponent:1]] isEqual: @"April"] || [[arrayMonths objectAtIndex:[monthPicker selectedRowInComponent:1]] isEqual: @"June"] || [[arrayMonths objectAtIndex:[monthPicker selectedRowInComponent:1]] isEqual: @"September"] || [[arrayMonths objectAtIndex:[monthPicker selectedRowInComponent:1]] isEqual: @"November"])) {
       
         arrayDays = arrayDays30;
 
@@ -1478,7 +1517,7 @@ shouldRecognizeSimultaneouslyWithGestureRecognizer:
     }*/
     //self.mapView.layer.frame.size
     // custom view to be used in our callout
-    customView = [[UIView alloc] initWithFrame:CGRectMake((self.view.layer.frame.size.height - 450) / 2, self.view.frame.size.width/2 - 50 , 450, 60)];
+    customView = [[UIView alloc] initWithFrame:CGRectMake((self.view.layer.frame.size.width - 450) / 2, self.view.frame.size.height/2 - 50 , 450, 60)];
     
     
     UILongPressGestureRecognizer *customViewtap = [[UILongPressGestureRecognizer alloc]

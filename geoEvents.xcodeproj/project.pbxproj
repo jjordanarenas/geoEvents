@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		EB13ADFD173AC88B00D41A01 /* libGoogleAdMobAds.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EB13ADFC173AC88B00D41A01 /* libGoogleAdMobAds.a */; };
 		EB1E3B0016CD78D4002A91CF /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = EB1E3AFD16CD78D4002A91CF /* InfoPlist.strings */; };
+		EB24B6911B0E32ED00C5CD0D /* GeoEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = EB24B6901B0E32ED00C5CD0D /* GeoEvent.m */; };
 		EB28DA841739B83400F6A583 /* ViewController_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = EB28DA821739B83400F6A583 /* ViewController_iPhone.xib */; };
 		EB30B94E17FCD8C20005B002 /* wiki_logo.png in Resources */ = {isa = PBXBuildFile; fileRef = EB30B94C17FCD8C20005B002 /* wiki_logo.png */; };
 		EB30B94F17FCD8C20005B002 /* wiki_logo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = EB30B94D17FCD8C20005B002 /* wiki_logo@2x.png */; };
@@ -28,7 +29,6 @@
 		EB4D007415DE9CC800394DCE /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = EB4D007215DE9CC800394DCE /* InfoPlist.strings */; };
 		EB4D007715DE9CC800394DCE /* geoEventsTests.m in Sources */ = {isa = PBXBuildFile; fileRef = EB4D007615DE9CC800394DCE /* geoEventsTests.m */; };
 		EB4D008115DE9D3000394DCE /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EB4D008015DE9D3000394DCE /* MapKit.framework */; };
-		EB5281F615DEA93E00D4D2D3 /* GeoEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = EB5281F115DEA93D00D4D2D3 /* GeoEvent.m */; };
 		EB5281FE15DEABEA00D4D2D3 /* LocationController.m in Sources */ = {isa = PBXBuildFile; fileRef = EB5281FD15DEABEA00D4D2D3 /* LocationController.m */; };
 		EB599152170CDCD20086C773 /* Icon-72.png in Resources */ = {isa = PBXBuildFile; fileRef = EB599151170CDCD20086C773 /* Icon-72.png */; };
 		EB599154170CDCDB0086C773 /* Icon-72@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = EB599153170CDCDB0086C773 /* Icon-72@2x.png */; };
@@ -97,6 +97,8 @@
 		EB13ADFB173AC88B00D41A01 /* GADRequestError.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GADRequestError.h; sourceTree = "<group>"; };
 		EB13ADFC173AC88B00D41A01 /* libGoogleAdMobAds.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libGoogleAdMobAds.a; sourceTree = "<group>"; };
 		EB1E3AFF16CD78D4002A91CF /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = geoEvents/es.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		EB24B68F1B0E32ED00C5CD0D /* GeoEvent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GeoEvent.h; sourceTree = "<group>"; };
+		EB24B6901B0E32ED00C5CD0D /* GeoEvent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GeoEvent.m; sourceTree = "<group>"; };
 		EB28DA831739B83400F6A583 /* es */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = es; path = es.lproj/ViewController_iPhone.xib; sourceTree = "<group>"; };
 		EB30B94C17FCD8C20005B002 /* wiki_logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = wiki_logo.png; sourceTree = "<group>"; };
 		EB30B94D17FCD8C20005B002 /* wiki_logo@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "wiki_logo@2x.png"; sourceTree = "<group>"; };
@@ -124,8 +126,6 @@
 		EB4D008015DE9D3000394DCE /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		EB4D008515DE9D7B00394DCE /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		EB5281EC15DEA71200D4D2D3 /* MyLocation.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MyLocation.h; sourceTree = "<group>"; };
-		EB5281F015DEA93D00D4D2D3 /* GeoEvent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GeoEvent.h; path = ../../GoldRush/Classes/GeoEvent.h; sourceTree = "<group>"; };
-		EB5281F115DEA93D00D4D2D3 /* GeoEvent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GeoEvent.m; path = ../../GoldRush/Classes/GeoEvent.m; sourceTree = "<group>"; };
 		EB5281FC15DEABEA00D4D2D3 /* LocationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LocationController.h; path = ../LocationController.h; sourceTree = "<group>"; };
 		EB5281FD15DEABEA00D4D2D3 /* LocationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LocationController.m; path = ../LocationController.m; sourceTree = "<group>"; };
 		EB599151170CDCD20086C773 /* Icon-72.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-72.png"; sourceTree = "<group>"; };
@@ -289,10 +289,10 @@
 		EB4D004E15DE9CC700394DCE /* geoEvents */ = {
 			isa = PBXGroup;
 			children = (
+				EB24B68F1B0E32ED00C5CD0D /* GeoEvent.h */,
+				EB24B6901B0E32ED00C5CD0D /* GeoEvent.m */,
 				EB5281FD15DEABEA00D4D2D3 /* LocationController.m */,
 				EB5281FC15DEABEA00D4D2D3 /* LocationController.h */,
-				EB5281F015DEA93D00D4D2D3 /* GeoEvent.h */,
-				EB5281F115DEA93D00D4D2D3 /* GeoEvent.m */,
 				EB4D005715DE9CC800394DCE /* AppDelegate.h */,
 				EB4D005815DE9CC800394DCE /* AppDelegate.m */,
 				EB4D005A15DE9CC800394DCE /* ViewController.h */,
@@ -452,7 +452,7 @@
 			name = geoEventsTests;
 			productName = geoEventsTests;
 			productReference = EB4D006815DE9CC800394DCE /* geoEventsTests.octest */;
-			productType = "com.apple.product-type.bundle";
+			productType = "com.apple.product-type.bundle.ocunit-test";
 		};
 /* End PBXNativeTarget section */
 
@@ -576,8 +576,8 @@
 			files = (
 				EB4D005515DE9CC800394DCE /* main.m in Sources */,
 				EB4D005915DE9CC800394DCE /* AppDelegate.m in Sources */,
+				EB24B6911B0E32ED00C5CD0D /* GeoEvent.m in Sources */,
 				EB4D005C15DE9CC800394DCE /* ViewController.m in Sources */,
-				EB5281F615DEA93E00D4D2D3 /* GeoEvent.m in Sources */,
 				EB5281FE15DEABEA00D4D2D3 /* LocationController.m in Sources */,
 				EB780AC615E4CEC40086FC5D /* MyLocation.m in Sources */,
 				EB77A5D417BE87B40005D1CE /* SMCalloutView.m in Sources */,
@@ -660,8 +660,8 @@
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Jorge Jordan Arenas";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Jorge Jordan Arenas";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
@@ -676,8 +676,8 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				ONLY_ACTIVE_ARCH = YES;
-				PROVISIONING_PROFILE = "58E0C284-4121-4025-90D3-717FBF9D3FA0";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "58E0C284-4121-4025-90D3-717FBF9D3FA0";
+				PROVISIONING_PROFILE = "";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -690,8 +690,8 @@
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Jorge Jordan Arenas";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Jorge Jordan Arenas";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				"GCC_PREPROCESSOR_DEFINITIONS[arch=*]" = "";
@@ -700,8 +700,8 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
-				PROVISIONING_PROFILE = "58E0C284-4121-4025-90D3-717FBF9D3FA0";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "58E0C284-4121-4025-90D3-717FBF9D3FA0";
+				PROVISIONING_PROFILE = "";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
@@ -718,7 +718,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "geoEvents/geoEvents-Prefix.pch";
 				INFOPLIST_FILE = "geoEvents/geoEvents-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/Add-ons/GoogleAnalyticsiOS_2.0beta3/Library\"",
@@ -744,7 +744,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "geoEvents/geoEvents-Prefix.pch";
 				INFOPLIST_FILE = "geoEvents/geoEvents-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/Add-ons/GoogleAnalyticsiOS_2.0beta3/Library\"",
