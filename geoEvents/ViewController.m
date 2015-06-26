@@ -1,6 +1,6 @@
 //
 //  ViewController.m
-//  geoEvents
+//  Geo Events
 //
 //  Created by Jorge Jordán Arenas on 17/08/12.
 //  Copyright (c) 2012 Jorge Jordán Arenas. All rights reserved.
@@ -85,7 +85,9 @@ static NSString *const SPANISH_BIRTHDAY_TEXT = @"Nacimiento";
 static NSString *const SPANISH_DEATH_TEXT = @"Fallecimiento";
 static NSString *const SPANISH_EVENT_TEXT = @"Evento histórico";
 
-static float WIKIPEDIA_BUTTON_SIZE = 30;
+static float BUTTON_SIZE = 30.0;
+static float BUTTON_COORD = 5.0;
+static float MIN_VIEW_WIDTH = 320.0;
 
 UIColor *greenColor;
 UIColor *redColor;
@@ -159,6 +161,16 @@ long METERSPERMILE_ZOOMIN = 5000;
 //double METERSPERMILE_ZOOMOUT = 3700000;
 long METERSPERMILE_ZOOMOUT = 3700000;
 
+double textViewWidth = 340;
+double textViewMargin = 54;
+double viewWidth;
+double viewHeight;
+double bubbleMarginUp = 50;
+double bubbleMarginLeft = 450;
+double bubbleMarginRight = 121;
+double bubbleButtonsWidth;
+double bubbleHeight = 60;
+
 -(void) locateUser{
 	CLLocationCoordinate2D zoomLocation;
 	zoomLocation.latitude = userLocation.coordinate.latitude;
@@ -181,6 +193,8 @@ long METERSPERMILE_ZOOMOUT = 3700000;
         dayInteger = [daySelected intValue] - 1;
         monthSelected = arrayDate[1];
         monthInteger = [monthSelected intValue] - 1;
+        
+        [self getGeoEvents];
     }
 }
 
@@ -205,8 +219,19 @@ long METERSPERMILE_ZOOMOUT = 3700000;
         calendarMustRefresh = FALSE;
     }
     
-    // Create custom colors
+    if (self.view.frame.size.width <= MIN_VIEW_WIDTH) {
+        viewWidth = self.view.frame.size.height;
+        viewHeight = self.view.frame.size.width;
+    } else {
+        viewWidth = self.view.frame.size.width;
+        viewHeight = self.view.frame.size.height;
+    }
     
+    if (bubbleMarginLeft > viewWidth) {
+        bubbleMarginLeft = viewWidth;
+    }
+    
+    // Create custom colors
     greenColor = [UIColor colorWithRed:76.0/255.0 green: 217.0/255.0 blue: 100.0/255.0 alpha: 1.0];
     redColor = [UIColor colorWithRed:252.0/255.0 green: 53.0/255.0 blue: 54.0/255.0 alpha: 1.0];
     violetColor = [UIColor colorWithRed:201.0/255.0 green: 105.0/255.0 blue: 224.0/255.0 alpha: 1.0];
@@ -222,26 +247,11 @@ long METERSPERMILE_ZOOMOUT = 3700000;
     
     //webView = [[UIWebView alloc] initWithFrame:CGRectMake(0, self.view.frame.size.width + 44, self.view.frame.size.height, self.view.frame.size.width)];
     
-    webView = [[UIWebView alloc] initWithFrame:CGRectMake(0, self.view.frame.size.width + 44, self.view.frame.size.width, self.view.frame.size.height)];
+    webView = [[UIWebView alloc] initWithFrame:CGRectMake(0, viewWidth + 44, viewWidth, viewHeight)];
     [webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:@""]]];
 
-  //  [self.navigationController pushViewController:self animated:YES];
-
-   // toolBar = [[UIToolbar alloc] initWithFrame:CGRectMake(0, self.view.frame.size.width, self.view.frame.size.height, 44)];
-    
-   // toolBar = [[UIToolbar alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.height, 44)];
-     toolBar = [[UIToolbar alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 44)];
-    /////toolBar = [[UINavigationBar alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.height, 44)];
-    
-     //webToolBar = [[UIToolbar alloc] initWithFrame:CGRectMake(0, self.view.frame.size.width, self.view.frame.size.height, 44)];
-    
-    webToolBar = [[UIToolbar alloc] initWithFrame:CGRectMake(0, self.view.frame.size.width, self.view.frame.size.width, 44)];
-    
-    
-  //  [self.navigationController pushViewController:self animated:TRUE];
-    
-    
-
+    toolBar = [[UIToolbar alloc] initWithFrame:CGRectMake(0, 0, viewWidth, 44)];
+    webToolBar = [[UIToolbar alloc] initWithFrame:CGRectMake(0, viewWidth, viewWidth, 44)];
     
     [toolBar setTintColor:blackColor];
     [webToolBar setTintColor:blackColor];
@@ -645,7 +655,7 @@ shouldRecognizeSimultaneouslyWithGestureRecognizer:
                 // Set up the Wikipedia button
                 myDetailButton = [MyAnnotationButton buttonWithType:UIButtonTypeCustom];
                 [myDetailButton setImage:imgWikipedia forState:UIControlStateNormal];
-                myDetailButton.frame = CGRectMake(5, 5, WIKIPEDIA_BUTTON_SIZE, WIKIPEDIA_BUTTON_SIZE);
+                myDetailButton.frame = CGRectMake(BUTTON_COORD, BUTTON_COORD, BUTTON_SIZE, BUTTON_SIZE);
                 myDetailButton.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
                 
                 myDetailButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentCenter;
@@ -662,7 +672,7 @@ shouldRecognizeSimultaneouslyWithGestureRecognizer:
                 myShareButton = [MyAnnotationButton buttonWithType:UIButtonTypeCustom];
     //            [myShareButton setImage:imgWikipedia forState:UIControlStateNormal];
                 [myShareButton setImage:imgShare forState:UIControlStateNormal];
-                myShareButton.frame = CGRectMake(0, 0, 40, 40);
+                myShareButton.frame = CGRectMake(BUTTON_COORD, BUTTON_COORD, BUTTON_SIZE, BUTTON_SIZE);
                 myShareButton.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
                 
                 myShareButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentCenter;
@@ -828,6 +838,8 @@ shouldRecognizeSimultaneouslyWithGestureRecognizer:
     // Iniciar una solicitud genérica para cargarla con un anuncio.
     // Lite
     ////////[bannerView_ loadRequest:[GADRequest request]];
+    
+   
 }
 
 - (void)locationManager:(CLLocationManager *)manager
@@ -1078,16 +1090,6 @@ shouldRecognizeSimultaneouslyWithGestureRecognizer:
 // tell the picker how many rows are available for a given component
 - (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component {
 
-    NSLog(@"Component %d", component);
-    
-    
-    NSLog(@"Row in component:  %d", [monthPicker selectedRowInComponent:0]);
-
-    NSLog(@"Monthpicker number of components:  %d", [monthPicker numberOfComponents]);
-
-    //NSLog(@"Number of rows in component 1:  %d", [monthPicker numberOfRowsInComponent:1]);
-
-    
     if(component == 1){
         return [arrayMonths count];
         
@@ -1131,10 +1133,6 @@ shouldRecognizeSimultaneouslyWithGestureRecognizer:
           
         NSString *month = [arrayMonths objectAtIndex:[monthPicker selectedRowInComponent:1]];
        
-        NSLog(@"Month %@", month);
-        
-        NSLog(@"Month %d", [monthPicker selectedRowInComponent:0]);
-
         if ([month isEqual:@"Enero"] || [month isEqual:@"January"]) {
             monthSelected = @"01";
             arrayDays = arrayDays31;
@@ -1227,8 +1225,6 @@ shouldRecognizeSimultaneouslyWithGestureRecognizer:
 
 - (NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component
 {
-    NSLog(@"Component %d", component);
-
     if(component == 1){
        
         NSString *month = [arrayMonths objectAtIndex:[monthPicker selectedRowInComponent:1]];
@@ -1487,7 +1483,18 @@ shouldRecognizeSimultaneouslyWithGestureRecognizer:
     paragraphStyle.maximumLineHeight = 15.0f;
     paragraphStyle.minimumLineHeight = 15.0f;
     
-    textView = [[UITextView alloc] initWithFrame:CGRectMake(54, 0, 340, 60)];
+    double customViewWidth = viewWidth - bubbleMarginRight;
+    
+    if (customViewWidth >= 600) {
+        customViewWidth = 600;
+    }
+    
+    textViewWidth = customViewWidth - 2 * textViewMargin;
+    
+    customView = [[UIView alloc] initWithFrame:CGRectMake((viewWidth - customViewWidth) / 2, viewHeight/2 - bubbleMarginUp , customViewWidth, bubbleHeight)];
+    
+    textView = [[UITextView alloc] initWithFrame:CGRectMake(textViewMargin, 0, textViewWidth, bubbleHeight)];
+    
     NSString *string = description;
     NSDictionary *ats = @{
                           NSFontAttributeName : [UIFont fontWithName:@"Arial" size:11.0f],
@@ -1508,17 +1515,6 @@ shouldRecognizeSimultaneouslyWithGestureRecognizer:
     [textView setHidden:FALSE];
     [textView setExclusiveTouch:YES];
     [textView setSelectable:NO];
-   // [textView resignFirstResponder];
-    //[textView setDelegate:self];
-    
-    
-    /*if(customView != nil){
-        [customView removeFromSuperview];
-    }*/
-    //self.mapView.layer.frame.size
-    // custom view to be used in our callout
-    customView = [[UIView alloc] initWithFrame:CGRectMake((self.view.layer.frame.size.width - 450) / 2, self.view.frame.size.height/2 - 50 , 450, 60)];
-    
     
     UILongPressGestureRecognizer *customViewtap = [[UILongPressGestureRecognizer alloc]
            initWithTarget:self

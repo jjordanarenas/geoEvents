@@ -676,8 +676,8 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				ONLY_ACTIVE_ARCH = YES;
-				PROVISIONING_PROFILE = "";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
+				PROVISIONING_PROFILE = "8697a824-80e4-4735-a423-3f2b8b9bd566";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "8697a824-80e4-4735-a423-3f2b8b9bd566";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -700,8 +700,8 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
-				PROVISIONING_PROFILE = "";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
+				PROVISIONING_PROFILE = "8697a824-80e4-4735-a423-3f2b8b9bd566";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "8697a824-80e4-4735-a423-3f2b8b9bd566";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
@@ -718,7 +718,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "geoEvents/geoEvents-Prefix.pch";
 				INFOPLIST_FILE = "geoEvents/geoEvents-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/Add-ons/GoogleAnalyticsiOS_2.0beta3/Library\"",
@@ -727,8 +727,8 @@
 				);
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "58E0C284-4121-4025-90D3-717FBF9D3FA0";
+				PROVISIONING_PROFILE = "d5edf836-c322-49db-a1f7-c098f55bd6cb";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "d5edf836-c322-49db-a1f7-c098f55bd6cb";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				WRAPPER_EXTENSION = app;
 			};
@@ -744,7 +744,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "geoEvents/geoEvents-Prefix.pch";
 				INFOPLIST_FILE = "geoEvents/geoEvents-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/Add-ons/GoogleAnalyticsiOS_2.0beta3/Library\"",
@@ -753,8 +753,8 @@
 				);
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "58E0C284-4121-4025-90D3-717FBF9D3FA0";
+				PROVISIONING_PROFILE = "d5edf836-c322-49db-a1f7-c098f55bd6cb";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "d5edf836-c322-49db-a1f7-c098f55bd6cb";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				WRAPPER_EXTENSION = app;
 			};
