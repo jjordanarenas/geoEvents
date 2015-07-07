@@ -11,7 +11,6 @@
 #import "GeoEvent.h"
 #import "MyLocation.h"
 #import "MyAnnotationButton.h"
-#import "GADBannerView.h"
 #import <QuartzCore/QuartzCore.h>
 
 @interface ViewController ()
@@ -60,9 +59,6 @@
 
 AppDelegate *appDelegate;
 
-// Lite
-////////GADBannerView *bannerView_;
-
 static NSString *const TYPE_BIRTHDAY = @"BIRTHDAY";
 static NSString *const TYPE_DEATH = @"DEATH";
 static NSString *const TYPE_EVENT = @"EVENT";
@@ -85,7 +81,22 @@ static NSString *const SPANISH_BIRTHDAY_TEXT = @"Nacimiento";
 static NSString *const SPANISH_DEATH_TEXT = @"Fallecimiento";
 static NSString *const SPANISH_EVENT_TEXT = @"Evento histórico";
 
+static NSString *const SHARE_DESCRIPTION_PART_1 = @"shareDescriptionPart1";
+static NSString *const BIRTH_PART_2 = @"birthPart2";
+static NSString *const DEATH_PART_2 = @"deathPart2";
+static NSString *const SHARE_DESCRIPTION_PART_3 = @"shareDescriptionPart3";
+static NSString *const SHARE_DESCRIPTION_EVENT_PART_3 = @"shareDescriptionEventPart3";
+
+static unsigned int *const MAX_TWITTER_CHARACTERS = 140;
+static unsigned long *const MAX_TWITTER_CHARACTERS_ES = 107;
+static unsigned long *const MAX_TWITTER_CHARACTERS_EN = 92;
+
 static float BUTTON_SIZE = 30.0;
+static float BUTTON_WIDTH = 40.0;
+static float BUTTON_POS_Y = 10.0;
+static float BUTTON_SHARE_POS_Y = 7.5;
+static float BUTTON_SHARE_POS_X = 10.0;
+static float BUTTON_POS_X = 7.5;
 static float BUTTON_COORD = 5.0;
 static float MIN_VIEW_WIDTH = 320.0;
 
@@ -142,6 +153,7 @@ UIImage *imgFilter;
 UIImage *imgClose;
 
 UIView *customView;
+UIView *rightButtonView;
 UITextView *textView;
 UILabel *labelTypeEvent;
 
@@ -170,6 +182,9 @@ double bubbleMarginLeft = 450;
 double bubbleMarginRight = 121;
 double bubbleButtonsWidth;
 double bubbleHeight = 60;
+double customViewWidth;
+
+NSString *eventDescription;
 
 -(void) locateUser{
 	CLLocationCoordinate2D zoomLocation;
@@ -187,6 +202,24 @@ double bubbleHeight = 60;
 }
 
 - (void)viewWillAppear:(BOOL)animated {
+    
+    if (self.view.frame.size.width <= MIN_VIEW_WIDTH) {
+        viewWidth = self.view.frame.size.height;
+        viewHeight = self.view.frame.size.width;
+    } else {
+        viewWidth = self.view.frame.size.width;
+        viewHeight = self.view.frame.size.height;
+    }
+    
+    customViewWidth = viewWidth - bubbleMarginRight;
+    
+    if (customViewWidth >= 600) {
+        customViewWidth = 600;
+    }
+    
+    textViewWidth = customViewWidth - 2 * textViewMargin;
+    
+    customView = [[UIView alloc] initWithFrame:CGRectMake((viewWidth - customViewWidth) / 2, viewHeight/2 - bubbleMarginUp , customViewWidth, bubbleHeight)];
     
     if (calendarMustRefresh){
         daySelected = arrayDate[0];
@@ -218,14 +251,14 @@ double bubbleHeight = 60;
      //   [monthPicker selectRow:monthInteger inComponent:0 animated:TRUE];
         calendarMustRefresh = FALSE;
     }
-    
+    /*
     if (self.view.frame.size.width <= MIN_VIEW_WIDTH) {
         viewWidth = self.view.frame.size.height;
         viewHeight = self.view.frame.size.width;
     } else {
         viewWidth = self.view.frame.size.width;
         viewHeight = self.view.frame.size.height;
-    }
+    }*/
     
     if (bubbleMarginLeft > viewWidth) {
         bubbleMarginLeft = viewWidth;
@@ -339,13 +372,6 @@ double bubbleHeight = 60;
     
     tapCloseFilters.numberOfTapsRequired = 1;
     [tapCloseFilters setDelegate:self];
-
-    // Set banner position
-    // Lite
-    ////////CGRect bannerFrame = bannerView_.frame;
-    ////////bannerFrame.origin.y = self.mapView.frame.origin.x + toolBar.frame.size.height;//toolBar.frame.size.height;
-    ////////bannerView_.frame = bannerFrame;
-
 }
 
 - (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer
@@ -386,8 +412,6 @@ shouldRecognizeSimultaneouslyWithGestureRecognizer:
                      }];
         [UIView commitAnimations];
        
-        // Lite
-        ////////[bannerView_ loadRequest:[GADRequest request]];
     } else {
         CGRect mapViewFrame = mapView.frame;
         CGRect toolBarFrame = toolBar.frame;
@@ -446,10 +470,6 @@ shouldRecognizeSimultaneouslyWithGestureRecognizer:
             [self showCalendarFilterMenu:0];
             
            [mapView setUserInteractionEnabled:YES];
-
-            
-            // Lite
-            ////////[bannerView_ loadRequest:[GADRequest request]];
         }
     }
 }
@@ -708,9 +728,294 @@ shouldRecognizeSimultaneouslyWithGestureRecognizer:
     [self showWebView];
 }
 
-- (void)shareButtonTapped:(id)sender event:(id)event
-{
+- (NSArray *) retrieveYearAndDescription {
+    eventDescription = [eventDescription stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+    NSArray *arrayTokens = [eventDescription componentsSeparatedByString: @":"];
+    NSMutableArray *arrayResult = [[NSMutableArray alloc] init];
+    if (arrayTokens.count < 2) {
+        NSArray *arrayAux;
+        NSString *stringAux = [[NSString alloc] init];
+        
+        arrayAux = [eventDescription componentsSeparatedByString: @" "];
+        
+        stringAux = [stringAux stringByAppendingString:@" "];
+        stringAux = [stringAux stringByAppendingString:arrayAux[0]];
+        
+        [arrayResult insertObject:stringAux atIndex:0];
+        
+        stringAux = @" ";
+        
+        for (int i = 1; i < arrayAux.count; i++) {
+            if (![arrayAux[i] isEqualToString:@""]) {
+                stringAux = [stringAux stringByAppendingString:arrayAux[i]];
+                // stringAux = [stringAux stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+                stringAux = [stringAux stringByAppendingString:@" "];
+            }
+        }
+        
+        //stringAux = [stringAux stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+        stringAux = [stringAux stringByReplacingOccurrencesOfString:@"\n " withString:@""];
+        stringAux = [stringAux stringByReplacingOccurrencesOfString:@"\n" withString:@""];
+        
+        [arrayResult insertObject:stringAux atIndex:1];
+    } else {
+        //////////// arrayResult = arrayTokens;
+        
+        NSArray *arrayAux;
+        NSString *stringAux = [[NSString alloc] init];
+        
+        arrayAux = [arrayTokens[1] componentsSeparatedByString: @" "];
+        //stringAux = arrayAux[1];
+        
+        /* stringAux = [stringAux stringByAppendingString:@" "];
+         stringAux = [stringAux stringByAppendingString:arrayTokens[0]];
+         stringAux = [stringAux stringByAppendingString:@" "];
+         */
+        stringAux = @" ";
+        stringAux = [stringAux stringByAppendingString:arrayTokens[0]];
+        //stringAux = [stringAux stringByAppendingString:@" "];
+        [arrayResult insertObject:stringAux atIndex:0];
+        
+        stringAux = @" ";
+        
+        for (int i = 1; i < arrayAux.count; i++) {
+            if (![arrayAux[i] isEqualToString:@""]) {
+                stringAux = [stringAux stringByAppendingString:arrayAux[i]];
+                //stringAux = [stringAux stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+                
+                stringAux = [stringAux stringByAppendingString:@" "];
+            }
+        }
+        
+        //stringAux = [stringAux stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+        stringAux = [stringAux stringByReplacingOccurrencesOfString:@"\n " withString:@""];
+        stringAux = [stringAux stringByReplacingOccurrencesOfString:@"\n" withString:@""];
+        
+        [arrayResult insertObject:stringAux atIndex:1];
+        
+        
+    }
+    
+    return arrayResult;
+}
+
+- (void)shareButtonTapped:(id)sender event:(id)event {
+    
     NSLog(@"Share button tapped");
+    
+    NSArray *arrayValuesDescription = [self retrieveYearAndDescription];
+    NSString *shareString;
+    
+    NSDictionary *dictionaryRoot = [NSDictionary dictionaryWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"InfoPlist" ofType:@"strings"]];
+    
+    NSString *shareDescriptionPart1 = [dictionaryRoot objectForKey:SHARE_DESCRIPTION_PART_1];
+    NSString *shareDescriptionPart3 = [dictionaryRoot objectForKey:SHARE_DESCRIPTION_PART_3];
+    NSString *shareDescriptionEventPart3 = [dictionaryRoot objectForKey:SHARE_DESCRIPTION_EVENT_PART_3];
+    NSString *descriptionPart2 = @"";
+    NSString *description;
+    NSString *yearDescription;
+    long descriptionLength;
+    
+    if (arrayValuesDescription.count > 0) {
+        yearDescription = [NSString stringWithFormat:@"%@", arrayValuesDescription[0]];
+    }
+    
+    if (arrayValuesDescription.count > 1) {
+        description = [NSString stringWithFormat:@"%@", arrayValuesDescription[1]];
+    }
+    
+    if (shareDescriptionPart1 == NULL) {
+        shareDescriptionPart1 = @"";
+    }
+    
+    if (shareDescriptionPart3 == NULL) {
+        shareDescriptionPart3 = @"";
+    }
+    
+    // if ([userLocale isEqualToString:LOCALE_SPANISH]){
+    //descriptionLength = MAX_TWITTER_CHARACTERS_ES;
+    NSLog(@"TWITTER length %i", MAX_TWITTER_CHARACTERS);
+    
+    NSLog(@"part1 length %lu", (unsigned long)shareDescriptionPart1.length);
+    NSLog(@"part3 length %lu", (unsigned long)shareDescriptionPart3.length);
+    
+    NSLog(@"description length %lu", descriptionLength);
+    //} else {
+    //descriptionLength = MAX_TWITTER_CHARACTERS - shareDescriptionPart1.length - shareDescriptionPart3.length;
+    //}
+    NSLog(@"description.length PRE %lu", (unsigned long)description.length);
+    /*    if (description.length >= (unsigned long)descriptionLength) {
+     description = [description substringToIndex:descriptionLength];
+     }*/
+    
+    NSLog(@"description.length POST %lu", (unsigned long)description.length);
+    
+    if (description == NULL) {
+        description = @"";
+    }
+    
+    /*else {
+     
+     }*/
+    
+    if([labelTypeEvent.text isEqualToString:SPANISH_DEATH_TEXT]){
+        
+        descriptionPart2 = [dictionaryRoot objectForKey:DEATH_PART_2];
+        
+        description = [self adjustDescription:description WithPart1:shareDescriptionPart1 part2:descriptionPart2 andPart3:shareDescriptionPart3];
+        shareString = [NSString stringWithFormat:@"%@%@ %@%@ %@", shareDescriptionPart1, yearDescription, descriptionPart2, description, shareDescriptionPart3];
+        
+    } else if([labelTypeEvent.text isEqualToString:SPANISH_BIRTHDAY_TEXT]){
+        descriptionPart2 = [dictionaryRoot objectForKey:BIRTH_PART_2];
+        description = [self adjustDescription:description WithPart1:shareDescriptionPart1 part2:descriptionPart2 andPart3:shareDescriptionPart3];
+        shareString = [NSString stringWithFormat:@"%@%@ %@%@ %@", shareDescriptionPart1, yearDescription, descriptionPart2, description, shareDescriptionPart3];
+    } else if([labelTypeEvent.text isEqualToString:SPANISH_EVENT_TEXT]){
+        //descriptionPart2 = [NSArray arrayWithArray:[dictionaryRoot objectForKey:@"deathPart2"]];
+        description = [self adjustDescription:description WithPart1:shareDescriptionPart1 part2:descriptionPart2 andPart3:shareDescriptionPart3];
+        shareString = [NSString stringWithFormat:@"%@%@,%@ %@", shareDescriptionPart1, yearDescription, description, shareDescriptionPart3];
+    } else if([labelTypeEvent.text isEqualToString:ENGLISH_DEATH_TEXT]){
+        descriptionPart2 = [dictionaryRoot objectForKey:DEATH_PART_2];
+        description = [self adjustDescription:description WithPart1:shareDescriptionPart1 part2:descriptionPart2 andPart3:shareDescriptionPart3];
+        shareString = [NSString stringWithFormat:@"%@%@ %@%@ %@", shareDescriptionPart1, yearDescription, descriptionPart2, description, shareDescriptionPart3];
+    } else if([labelTypeEvent.text isEqualToString:ENGLISH_BIRTHDAY_TEXT]){
+        descriptionPart2 = [dictionaryRoot objectForKey:BIRTH_PART_2];
+        description = [self adjustDescription:description WithPart1:shareDescriptionPart1 part2:descriptionPart2 andPart3:shareDescriptionPart3];
+        shareString = [NSString stringWithFormat:@"%@%@ %@%@ %@", shareDescriptionPart1, yearDescription, descriptionPart2, description, shareDescriptionPart3];
+    } else if([labelTypeEvent.text isEqualToString:ENGLISH_EVENT_TEXT]){
+        // descriptionPart2 = [NSArray arrayWithArray:[dictionaryRoot objectForKey:@"deathPart2"]];
+        description = [self adjustDescription:description WithPart1:shareDescriptionPart1 part2:descriptionPart2 andPart3:shareDescriptionPart3];
+        shareString = [NSString stringWithFormat:@"%@%@,%@ %@", shareDescriptionPart1, yearDescription, description, shareDescriptionPart3];
+        
+    }
+    
+    
+    
+    
+    
+    
+    
+    UIActivityViewController *activityViewController =
+    [[UIActivityViewController alloc] initWithActivityItems:@[shareString]
+                                      applicationActivities:nil];
+    //activityViewController.popoverPresentationController.sourceView = self.view;
+    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
+        //     activityViewController.popoverPresentationController.sourceView = textView;
+        //     activityViewController.popoverPresentationController.sourceRect = textView.frame;
+        activityViewController.popoverPresentationController.sourceView = rightButtonView;
+        //activityViewController.popoverPresentationController.sourceRect = rightButtonView.frame;
+    }
+    
+    activityViewController.excludedActivityTypes =
+    
+    @[       UIActivityTypePostToWeibo,
+             UIActivityTypePrint,
+             UIActivityTypeCopyToPasteboard,
+             // UIActivityTypeAssignToContact,
+             UIActivityTypeSaveToCameraRoll,
+             UIActivityTypeAddToReadingList,
+             UIActivityTypePostToFlickr,
+             UIActivityTypePostToVimeo,
+             UIActivityTypePostToTencentWeibo,
+             UIActivityTypeAirDrop,
+             // UIActivity
+             UIActivityTypePostToFacebook // TO DO
+             ];
+    //UIActivityTypePrint, UIActivityTypeAssignToContact, UIActivityTypePostToVimeo, UIActivityTypeMail];
+    
+    //////////    [navigationController presentViewController:activityViewController
+    //////////                                       animated:YES
+    //////////                           completion:^{
+    //////////                     // ...
+    //////////       }];
+    
+    [activityViewController setCompletionHandler:^(NSString *activityType, BOOL completed)
+     {
+         NSMutableString *messageString = [[NSMutableString alloc]initWithCapacity:0];
+         if ([activityType isEqualToString:@"com.apple.UIKit.activity.SaveToCameraRoll"])
+         {
+             NSLog(@"camera");
+         }
+         else if ([activityType isEqualToString:@"com.apple.UIKit.activity.PostToFacebook"])
+         {
+             NSLog(@"Facebook");
+         }
+         else if ([activityType isEqualToString:@"com.apple.UIKit.activity.PostToTwitter"])
+         {
+             NSLog(@"twitter");
+         }
+         else if ([activityType isEqualToString:@"com.apple.UIKit.activity.Mail"])
+         {
+             NSLog(@"email");
+         }
+         else if ([activityType isEqualToString:@"com.apple.UIKit.activity.CopyToPasteboard"])
+         {
+             NSLog(@"copy paste");
+             
+         }
+         else if ([activityType isEqualToString:@"com.apple.UIKit.activity.AssignToContact"])
+         {
+             NSLog(@"contact");
+         }
+         else if ([activityType isEqualToString:@"com.apple.UIKit.activity.Message"])
+         {
+             NSLog(@"message");
+         }
+         else if ([activityType isEqualToString:@"com.apple.UIKit.activity.Print"])
+         {
+             
+             NSLog(@"printer");
+         }
+         
+         if (completed == TRUE)
+         {
+             NSLog(@"Success");
+         }
+         //         [messageString release];
+         //       messageString = nil;
+         //     [controller release];
+     }];
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    //  activityViewController.popoverPresentationController.sourceView = self.view;
+    
+    //[self.view addSubview:activityViewController.view];
+    
+    [self presentViewController:activityViewController animated:YES completion:nil];
+    
+    
+}
+
+
+- (NSString *) adjustDescription:(NSString *)description WithPart1:(NSString *)part1 part2:(NSString *)part2 andPart3:(NSString *)part3 {
+    unsigned long descriptionLength;
+    NSString *descriptionResult = description;
+    if(![labelTypeEvent.text isEqualToString:SPANISH_EVENT_TEXT] && ![labelTypeEvent.text isEqualToString:ENGLISH_EVENT_TEXT]){
+        descriptionLength = (unsigned long)MAX_TWITTER_CHARACTERS - ((unsigned long)part1.length + (unsigned long)part2.length + 2 + 4 + (unsigned long)part3.length + 1);
+        
+    } else {
+        descriptionLength = (unsigned long)MAX_TWITTER_CHARACTERS - ((unsigned long)part1.length + 2 + 4 + (unsigned long)part3.length + 1);
+        
+    }
+    
+    if (descriptionResult.length >= (unsigned long)descriptionLength) {
+        descriptionResult = [description substringToIndex:descriptionLength];
+    }
+    
+    return descriptionResult;
+    
 }
 
 - (void)viewDidLoad
@@ -814,32 +1119,6 @@ shouldRecognizeSimultaneouslyWithGestureRecognizer:
     arrayDaysFebruary = [[NSMutableArray alloc] initWithObjects:@"1", @"2", @"3", @"4", @"5", @"6", @"7", @"8", @"9", @"10", @"11", @"12", @"13", @"14", @"15", @"16", @"17", @"18", @"19", @"20", @"21", @"22", @"23", @"24", @"25", @"26", @"27", @"28", @"29", nil];
     arrayDays30 = [[NSMutableArray alloc] initWithObjects:@"1", @"2", @"3", @"4", @"5", @"6", @"7", @"8", @"9", @"10", @"11", @"12", @"13", @"14", @"15", @"16", @"17", @"18", @"19", @"20", @"21", @"22", @"23", @"24", @"25", @"26", @"27", @"28", @"29", @"30", nil];
     arrayDays31 = [[NSMutableArray alloc] initWithObjects:@"1", @"2", @"3", @"4", @"5", @"6", @"7", @"8", @"9", @"10", @"11", @"12", @"13", @"14", @"15", @"16", @"17", @"18", @"19", @"20", @"21", @"22", @"23", @"24", @"25", @"26", @"27", @"28", @"29", @"30", @"31", nil];
-    
-    // Lite
-    ////////NSLog( @"ADMOB version: %@", [GADRequest sdkVersion] );
-
-    // Crear una vista del tamaño estándar en la parte inferior de la pantalla. GADBannerView
-    // Lite
-    ////////bannerView_ = [[GADBannerView alloc] initWithAdSize:kGADAdSizeSmartBannerLandscape];
-    
-    // Especificar el "identificador de bloque" del anuncio. Se trata del ID de editor de AdMob.
-    // Lite
-    ////////bannerView_.adUnitID = @"a150fbda1caeec3";
-    
-    // Hay que comunicar al módulo de tiempo de ejecución el UIViewController que debe restaurar después de llevar
-    // al usuario donde vaya el anuncio y añadirlo a la jerarquía de vistas.
-    // Lite
-    ////////bannerView_.rootViewController = self;
-    
-    
-    // Lite
-    ////////[self.mapView addSubview:bannerView_];
-    
-    // Iniciar una solicitud genérica para cargarla con un anuncio.
-    // Lite
-    ////////[bannerView_ loadRequest:[GADRequest request]];
-    
-   
 }
 
 - (void)locationManager:(CLLocationManager *)manager
@@ -1431,9 +1710,11 @@ shouldRecognizeSimultaneouslyWithGestureRecognizer:
     MyAnnotationButton *leftButton =  (MyAnnotationButton *)pin.leftCalloutAccessoryView;
     MyAnnotationButton *rightButton =  (MyAnnotationButton *)pin.rightCalloutAccessoryView;
     
-    UIView *leftButtonView = [[UIView alloc] initWithFrame:CGRectMake(7.5, 10 , 40, 40)];
+    long posX = BUTTON_SIZE + textViewWidth + BUTTON_SIZE + 2.0;
+    
+    UIView *leftButtonView = [[UIView alloc] initWithFrame:CGRectMake(BUTTON_POS_X, BUTTON_POS_Y , BUTTON_WIDTH, BUTTON_WIDTH)];
     [leftButtonView addSubview:leftButton];
-    UIView *rightButtonView = [[UIView alloc] initWithFrame:CGRectMake(402.5, 10 , 40, 40)];
+    rightButtonView = [[UIView alloc] initWithFrame:CGRectMake(posX, BUTTON_SHARE_POS_Y , BUTTON_WIDTH, BUTTON_WIDTH)];
     [rightButtonView addSubview:rightButton];
     
     
@@ -1473,6 +1754,8 @@ shouldRecognizeSimultaneouslyWithGestureRecognizer:
     description = [description stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
     description = [description stringByReplacingOccurrencesOfString:@"&amp;nbsp;" withString:@" "];
     
+    eventDescription = description;
+    
     int descLength = [description length];
     
     double numTextFields = round(description.length / 50);
@@ -1482,16 +1765,6 @@ shouldRecognizeSimultaneouslyWithGestureRecognizer:
     paragraphStyle.lineHeightMultiple = 15.0f;
     paragraphStyle.maximumLineHeight = 15.0f;
     paragraphStyle.minimumLineHeight = 15.0f;
-    
-    double customViewWidth = viewWidth - bubbleMarginRight;
-    
-    if (customViewWidth >= 600) {
-        customViewWidth = 600;
-    }
-    
-    textViewWidth = customViewWidth - 2 * textViewMargin;
-    
-    customView = [[UIView alloc] initWithFrame:CGRectMake((viewWidth - customViewWidth) / 2, viewHeight/2 - bubbleMarginUp , customViewWidth, bubbleHeight)];
     
     textView = [[UITextView alloc] initWithFrame:CGRectMake(textViewMargin, 0, textViewWidth, bubbleHeight)];
     

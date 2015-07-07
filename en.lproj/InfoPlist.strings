@@ -1,2 +1,6 @@
 /* Localized versions of Info.plist keys */
-
+"shareDescriptionPart1"="#onthisday in";
+"birthPart2"="was born";
+"deathPart2"="died";
+"shareDescriptionPart3"="goo.gl/pxl4fM";
+"shareDescriptionEventPart3"="... goo.gl/pxl4fM";
